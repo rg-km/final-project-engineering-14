@@ -5,9 +5,6 @@ import (
 )
 
 func main() {
-	var total int
-
-	total = 2 + 3
-
-	fmt.Println(total)
+	fmt.Println("Hello, World!")
+	fmt.Println("Hello, World!")
 }
