@@ -14,6 +14,11 @@ type RegisterRequest struct {
 	Phone    string `json:"phone"`
 }
 
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 var (
 	ErrRequiredUsername = errors.New("required username")
 	ErrRequiredEmail    = errors.New("required email")
@@ -21,6 +26,7 @@ var (
 	ErrRequiredPhone    = errors.New("required phone")
 	ErrInvalidEmail     = errors.New("invalid email")
 	ErrDomainNotFound   = errors.New("domain not found")
+	ErrInvalidPassword  = errors.New("invalid password")
 	ErrInvalidAction    = errors.New("invalid action")
 )
 
@@ -45,6 +51,26 @@ func (r *RegisterRequest) ValidateRegister(action string) error {
 		}
 		if r.Phone == "" {
 			return ErrRequiredPhone
+		}
+		return nil
+	}
+
+	return ErrInvalidAction
+}
+
+func (l *LoginRequest) PrepareLogin() {
+	l.Email = strings.TrimSpace(l.Email)
+	l.Password = strings.TrimSpace(l.Password)
+}
+
+func (l *LoginRequest) ValidateLogin(action string) error {
+	switch strings.ToLower(action) {
+	case "login":
+		if err := validateEmail(l.Email); err != nil {
+			return err
+		}
+		if l.Password == "" {
+			return ErrInvalidPassword
 		}
 		return nil
 	}

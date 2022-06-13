@@ -6,3 +6,11 @@ type RegisterResponse struct {
 	Password string `json:"password"`
 	Phone    string `json:"phone"`
 }
+
+type LoginResponse struct {
+	Email    string `json:"email"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Phone    string `json:"phone"`
+	Role     string `json:"role"`
+}
