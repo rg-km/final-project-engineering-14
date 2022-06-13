@@ -10,6 +10,7 @@ import (
 type AuthRepository interface {
 	Save(ctx context.Context, user domain.UserDomain) (domain.UserDomain, error)
 	GetUser(ctx context.Context, email, password string) (domain.UserDomain, error)
+	Logout(ctx context.Context, userId uint32) (bool, error)
 }
 
 type Repository struct {
