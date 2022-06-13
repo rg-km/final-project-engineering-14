@@ -3,9 +3,11 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/rg-km/final-project-engineering-14/backend/helper"
 	"github.com/rg-km/final-project-engineering-14/backend/model/web"
+	"github.com/rg-km/final-project-engineering-14/backend/pkg/service"
 )
 
 func (handler *Handler) signUp(writer http.ResponseWriter, request *http.Request) {
@@ -82,8 +84,8 @@ func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request
 		return
 	}
 
-	userLoginResponse, err := handler.services.AuthService.Login(
-		request.Context(), loginRequest,
+	userLoginResponse, err := handler.services.AuthService.GenerateToken(
+		request.Context(), loginRequest.Email, loginRequest.Password,
 	)
 	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
@@ -101,14 +103,29 @@ func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request
 		Data:    userLoginResponse,
 	}
 
+	http.SetCookie(writer, &http.Cookie{
+		Name:    "token",
+		Value:   userLoginResponse.Token,
+		Expires: time.Now().Add(service.TokenExpires),
+		Path:    "/",
+	})
+
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
 func (handler *Handler) signOut(writer http.ResponseWriter, request *http.Request) {
 	handler.AllowOrigin(writer, request)
-	var LogoutRequest web.LogoutRequest
-	err := json.NewDecoder(request.Body).Decode(&LogoutRequest)
+	token, err := request.Cookie("token")
 	if err != nil {
+		if err == http.ErrNoCookie {
+			writer.WriteHeader(http.StatusUnauthorized)
+			json.NewEncoder(writer).Encode(web.WebResponse{
+				Status:  http.StatusUnauthorized,
+				Message: http.StatusText(http.StatusUnauthorized),
+				Data:    "No token provided",
+			})
+			return
+		}
 		writer.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(writer).Encode(web.WebResponse{
 			Status:  http.StatusBadRequest,
@@ -118,7 +135,18 @@ func (handler *Handler) signOut(writer http.ResponseWriter, request *http.Reques
 		return
 	}
 
-	_, err = handler.services.AuthService.Logout(request.Context(), LogoutRequest.UserId)
+	if token.Value == "" {
+		writer.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(writer).Encode(web.WebResponse{
+			Status:  http.StatusUnauthorized,
+			Message: http.StatusText(http.StatusUnauthorized),
+			Data:    "No token provided",
+		})
+		return
+	}
+	userId, _ := handler.services.AuthService.ParseToken(request.Context(), token.Value)
+
+	_, err = handler.services.AuthService.Logout(request.Context(), uint32(userId))
 	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(writer).Encode(web.WebResponse{
@@ -128,6 +156,15 @@ func (handler *Handler) signOut(writer http.ResponseWriter, request *http.Reques
 		})
 		return
 	}
+	cookie := http.Cookie{
+		Name:     "token",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HttpOnly: true,
+		MaxAge:   -1,
+	}
+
+	http.SetCookie(writer, &cookie)
 
 	webResponse := web.WebResponse{
 		Status:  http.StatusOK,
