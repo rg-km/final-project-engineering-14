@@ -14,12 +14,13 @@ func ToRegisterResponse(user domain.UserDomain) web.RegisterResponse {
 	}
 }
 
-func ToLoginResponse(user domain.UserDomain) web.LoginResponse {
+func ToLoginResponse(user domain.UserDomain, token string) web.LoginResponse {
 	return web.LoginResponse{
 		Email:    user.Email,
 		Username: user.Username,
 		Password: user.Password,
 		Phone:    user.Phone,
 		Role:     user.Role,
+		Token:    token,
 	}
 }

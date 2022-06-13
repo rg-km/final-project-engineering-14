@@ -9,7 +9,9 @@ import (
 
 type AuthService interface {
 	Create(ctx context.Context, request web.RegisterRequest) (web.RegisterResponse, error)
-	Login(ctx context.Context, request web.LoginRequest) (web.LoginResponse, error)
+	// Login(ctx context.Context, request web.LoginRequest) (web.LoginResponse, error)
+	GenerateToken(ctx context.Context, email, password string) (web.LoginResponse, error)
+	ParseToken(ctx context.Context, token string) (uint32, error)
 	Logout(ctx context.Context, userId uint32) (bool, error)
 }
 

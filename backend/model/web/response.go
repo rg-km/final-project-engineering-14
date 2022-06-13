@@ -13,4 +13,5 @@ type LoginResponse struct {
 	Password string `json:"password"`
 	Phone    string `json:"phone"`
 	Role     string `json:"role"`
+	Token    string `json: "token"`
 }
