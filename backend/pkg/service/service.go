@@ -9,6 +9,7 @@ import (
 
 type AuthService interface {
 	Create(ctx context.Context, request web.RegisterRequest) (web.RegisterResponse, error)
+	Login(ctx context.Context, request web.LoginRequest) (web.LoginResponse, error)
 }
 
 type Service struct {

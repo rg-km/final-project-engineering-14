@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -51,4 +52,15 @@ func (service *AuthServiceSQLite) Create(ctx context.Context, request web.Regist
 	helper.PanicIfError(err)
 
 	return helper.ToRegisterResponse(userResult), nil
+}
+
+func (service *AuthServiceSQLite) Login(ctx context.Context, request web.LoginRequest) (web.LoginResponse, error) {
+	user, err := service.repository.GetUser(ctx, request.Email, request.Password)
+	helper.PanicIfError(err)
+
+	if user.IsLogin {
+		return web.LoginResponse{}, errors.New("user already login")
+	}
+
+	return helper.ToLoginResponse(user), nil
 }

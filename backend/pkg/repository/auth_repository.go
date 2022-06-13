@@ -60,3 +60,41 @@ func (repo *AuthRepositorySQLite) Save(ctx context.Context, user domain.UserDoma
 
 	return domain.UserDomain{}, nil
 }
+
+func (repo *AuthRepositorySQLite) GetUser(ctx context.Context, email, password string) (domain.UserDomain, error) {
+	tx, err := repo.DB.Begin()
+	helper.PanicIfError(err)
+
+	querySelectALl := ` 
+	SELECT id, username, email, password, phone, role, is_login 
+	FROM users 
+	WHERE email = ? AND password = ?`
+
+	var user domain.UserDomain
+	stmt, err := tx.PrepareContext(ctx, querySelectALl)
+	helper.PanicIfError(err)
+	defer stmt.Close()
+
+	row := stmt.QueryRowContext(ctx, email, password)
+	err = row.Scan(
+		&user.Id, &user.Username, &user.Email, &user.Password,
+		&user.Phone, &user.Role, &user.IsLogin,
+	)
+	if err != nil {
+		tx.Rollback()
+		return domain.UserDomain{}, err
+	}
+
+	queryUpdate := `UPDATE users SET is_login = true WHERE id = ?`
+	stmt, err = tx.PrepareContext(ctx, queryUpdate)
+	helper.PanicIfError(err)
+	defer stmt.Close()
+
+	_, err = stmt.ExecContext(ctx, user.Id)
+	if err != nil {
+		tx.Rollback()
+		return domain.UserDomain{}, err
+	}
+
+	return user, tx.Commit()
+}

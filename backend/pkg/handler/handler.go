@@ -23,6 +23,7 @@ func (handler *Handler) InitRoutes() *http.ServeMux {
 	fmt.Printf("\n\t[INFO] Running in localhost:%d\n", 8080)
 
 	router.HandleFunc("/auth/signup", handler.signUp)
+	router.HandleFunc("/auth/sign-in", handler.signIn)
 
 	return router
 }
