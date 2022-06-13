@@ -10,6 +10,7 @@ import (
 	"github.com/rg-km/final-project-engineering-14/backend/model/domain"
 	"github.com/rg-km/final-project-engineering-14/backend/model/web"
 	"github.com/rg-km/final-project-engineering-14/backend/pkg/repository"
+	"github.com/rg-km/final-project-engineering-14/backend/security"
 )
 
 const (
@@ -35,12 +36,13 @@ func NewAuthService(repository repository.AuthRepository) *AuthServiceSQLite {
 }
 
 func (service *AuthServiceSQLite) Create(ctx context.Context, request web.RegisterRequest) (web.RegisterResponse, error) {
+	hashed := security.GeneratePasswordHash(request.Password)
 	timeLoc, _ := time.LoadLocation("Asia/Jakarta")
 
 	user := domain.UserDomain{
 		Username:  request.Username,
 		Email:     request.Email,
-		Password:  request.Password,
+		Password:  hashed,
 		Phone:     request.Phone,
 		Role:      "guest",
 		IsLogin:   false,
@@ -63,4 +65,8 @@ func (service *AuthServiceSQLite) Login(ctx context.Context, request web.LoginRe
 	}
 
 	return helper.ToLoginResponse(user), nil
+}
+
+func (service *AuthServiceSQLite) Logout(ctx context.Context, userId uint32) (bool, error) {
+	return service.repository.Logout(ctx, userId)
 }

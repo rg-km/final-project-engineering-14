@@ -103,3 +103,37 @@ func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request
 
 	helper.WriteToResponseBody(writer, webResponse)
 }
+
+func (handler *Handler) signOut(writer http.ResponseWriter, request *http.Request) {
+	handler.AllowOrigin(writer, request)
+	var LogoutRequest web.LogoutRequest
+	err := json.NewDecoder(request.Body).Decode(&LogoutRequest)
+	if err != nil {
+		writer.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(writer).Encode(web.WebResponse{
+			Status:  http.StatusBadRequest,
+			Message: "Invalid request body",
+			Data:    err.Error(),
+		})
+		return
+	}
+
+	_, err = handler.services.AuthService.Logout(request.Context(), LogoutRequest.UserId)
+	if err != nil {
+		writer.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(writer).Encode(web.WebResponse{
+			Status:  http.StatusInternalServerError,
+			Message: http.StatusText(http.StatusInternalServerError),
+			Data:    err.Error(),
+		})
+		return
+	}
+
+	webResponse := web.WebResponse{
+		Status:  http.StatusOK,
+		Message: http.StatusText(http.StatusOK),
+		Data:    "Successfully logged out",
+	}
+
+	helper.WriteToResponseBody(writer, webResponse)
+}

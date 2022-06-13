@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/rg-km/final-project-engineering-14/backend/helper"
+	"github.com/rg-km/final-project-engineering-14/backend/security"
 )
 
 func Seed(db *sql.DB) {
@@ -19,12 +20,13 @@ func Seed(db *sql.DB) {
 	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelfunc()
 
+	hashed := security.GeneratePasswordHash("admin123")
 	formatHours := "2006-01-02 15:04:05"
 
 	args := []interface{}{
 		"admin",
 		"admin@gmail.com",
-		"123",
+		hashed,
 		"081234567890",
 		"admin",
 		false,

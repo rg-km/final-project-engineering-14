@@ -98,3 +98,22 @@ func (repo *AuthRepositorySQLite) GetUser(ctx context.Context, email, password s
 
 	return user, tx.Commit()
 }
+
+func (repo *AuthRepositorySQLite) Logout(ctx context.Context, userId uint32) (bool, error) {
+	tx, err := repo.DB.Begin()
+	helper.PanicIfError(err)
+
+	query := `UPDATE users SET is_login = false WHERE id = ?`
+
+	stmt, err := tx.PrepareContext(ctx, query)
+	helper.PanicIfError(err)
+	defer stmt.Close()
+
+	_, err = stmt.ExecContext(ctx, userId)
+	if err != nil {
+		tx.Rollback()
+		return false, err
+	}
+
+	return true, tx.Commit()
+}

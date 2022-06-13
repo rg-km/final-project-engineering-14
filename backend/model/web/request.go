@@ -19,6 +19,10 @@ type LoginRequest struct {
 	Password string `json:"password"`
 }
 
+type LogoutRequest struct {
+	UserId uint32 `json:"user_id"`
+}
+
 var (
 	ErrRequiredUsername = errors.New("required username")
 	ErrRequiredEmail    = errors.New("required email")
