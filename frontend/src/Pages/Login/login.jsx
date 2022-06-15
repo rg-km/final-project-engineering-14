@@ -6,10 +6,10 @@ const Login = () => {
 	return (
 		<section id="login-pages">
 			<div className="row">
-				<div className="login-left col-lg-5">
-					<img src={banner} alt="banner" />
+				<div className="login-left col-lg-6">
+					<img className="w-75 img-fluid mx-auto" src={banner} alt="banner" />
 				</div>
-				<div className="login-right col-lg-7 my-auto">
+				<div className="login-right col-lg-6 my-auto">
 					<form>
 						<h2 className="mb-5">Login to your Account</h2>
 						<div className="mb-3">
