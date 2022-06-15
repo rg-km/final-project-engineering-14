@@ -1,8 +1,15 @@
-#login-pages .test1 {
-  background-color: blue;
+#login-pages .login-right .form-control {
+  width: 500px;
 }
 
-#login-pages .test2 {
-  background-color: red;
+#login-pages .login-right button {
+  width: 500px;
+  height: 54px;
+  left: -1px;
+  top: 72px;
+  background: #ffcc48;
+  color: #000;
+  border-radius: 5px;
+  border: 0px;
 }
 /*# sourceMappingURL=style.css.map */
