@@ -1,8 +1,20 @@
 #login-pages {
-	.test1 {
-		background-color: blue;
+	.login-left {
 	}
-	.test2 {
-		background-color: red;
+	.login-right {
+		.form-control {
+			width: 500px;
+		}
+		button {
+			width: 500px;
+			height: 54px;
+			left: -1px;
+			top: 72px;
+
+			background: #ffcc48;
+			color: #000;
+			border-radius: 5px;
+			border: 0px;
+		}
 	}
 }
