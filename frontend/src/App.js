@@ -1,11 +1,11 @@
 import React from "react";
-import { Login } from "./Pages";
+import { Login, Register } from "./Pages";
 
 const App = () => {
-	return (
-		<div>
-			<Login />
-		</div>
-	);
+  return (
+    <div>
+      <Register />
+    </div>
+  );
 };
 export default App;

@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+:root {
+  --main-color: #006a7a;
+  --button-color: #ffcc48;
+  --main-font: "Poppins", sans-serif;
+}
+
+#register-pages {
+  overflow-x: hidden;
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+
+#register-pages .register-left {
+  background-color: #006a7a;
+  left: 2px;
+  top: -1px;
+}
+
+#register-pages .register-left .register-logo {
+  width: 60%;
+  height: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 140px auto 0 125px;
+}
+
+#register-pages .register-right {
+  font-family: var(--main-font);
+  margin: 65px 0px 0px 100px;
+}
+
+#register-pages .register-right .header-register {
+  font-size: 30px;
+}
+
+#register-pages .register-right .register-text .h2 {
+  font-size: 25px;
+}
+
+#register-pages .register-right .register-text .p {
+  font-size: 16px;
+}
+
+#register-pages .register-right .form-control {
+  width: 50%;
+}
+
+#register-pages .register-right button {
+  width: 370px;
+  height: 54px;
+  left: -1px;
+  top: 72px;
+  background: var(--button-color);
+  color: #000;
+  border-radius: 5px;
+  border: 0px;
+  font-family: var(--main-font);
+}
+/*# sourceMappingURL=register.css.map */
