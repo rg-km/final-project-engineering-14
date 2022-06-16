@@ -8,8 +8,8 @@
 }
 
 #register-pages {
-  overflow-x: hidden;
   max-width: max-content;
+  margin: 0px 0px 0px 0px;
 
   .register-left {
     background-color: #006a7a;
@@ -20,42 +20,24 @@
       width: 60%;
       height: 60%;
       display: flex;
-
-      margin: 140px auto 0 125px;
+      margin: 120px auto 0 80px;
     }
   }
 
   .register-right {
     font-family: var(--main-font);
-    margin: 65px 0px 0px 100px;
+    margin: 0px 0px 0px 80px;
 
-    .header-register {
-      font-size: 30px;
+    .border-radius-10 {
+      border-radius: 10px;
+      // border-style: solid;
+      // border-width: thin;
     }
+  }
 
-    .register-text {
-      .h2 {
-        font-size: 25px;
-      }
-      .p {
-        font-size: 16px;
-      }
-    }
-
-    .form-control {
-      width: 50%;
-    }
-    button {
-      width: 370px;
-      height: 54px;
-      left: -1px;
-      top: 72px;
-
-      background: var(--button-color);
-      color: #000;
-      border-radius: 5px;
-      border: 0px;
-      font-family: var(--main-font);
-    }
+  .btn-color-theme {
+    color: black !important;
+    background-color: #ffcc48;
+    border: 0px;
   }
 }

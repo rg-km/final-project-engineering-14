@@ -6,10 +6,10 @@
 }
 
 #register-pages {
-  overflow-x: hidden;
   max-width: -webkit-max-content;
   max-width: -moz-max-content;
   max-width: max-content;
+  margin: 0px 0px 0px 0px;
 }
 
 #register-pages .register-left {
@@ -24,39 +24,21 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 140px auto 0 125px;
+  margin: 120px auto 0 80px;
 }
 
 #register-pages .register-right {
   font-family: var(--main-font);
-  margin: 65px 0px 0px 100px;
+  margin: 0px 0px 0px 80px;
 }
 
-#register-pages .register-right .header-register {
-  font-size: 30px;
+#register-pages .register-right .border-radius-10 {
+  border-radius: 10px;
 }
 
-#register-pages .register-right .register-text .h2 {
-  font-size: 25px;
-}
-
-#register-pages .register-right .register-text .p {
-  font-size: 16px;
-}
-
-#register-pages .register-right .form-control {
-  width: 50%;
-}
-
-#register-pages .register-right button {
-  width: 370px;
-  height: 54px;
-  left: -1px;
-  top: 72px;
-  background: var(--button-color);
-  color: #000;
-  border-radius: 5px;
+#register-pages .btn-color-theme {
+  color: black !important;
+  background-color: #ffcc48;
   border: 0px;
-  font-family: var(--main-font);
 }
 /*# sourceMappingURL=register.css.map */
