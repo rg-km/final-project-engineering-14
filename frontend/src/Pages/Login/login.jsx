@@ -11,6 +11,7 @@ const Login = () => {
 				</div>
 				<div className="login-right col-lg-6 my-auto">
 					<form>
+						<p>Welcome Back</p>
 						<h2 className="mb-5">Login to your Account</h2>
 						<div className="mb-3">
 							<label for="usernameInput" className="form-label">
@@ -22,9 +23,6 @@ const Login = () => {
 								id="usernameInput1"
 								aria-describedby="usernameHelp"
 							/>
-							<div id="emailHelp" className="form-text">
-								We'll never share your username with anyone else.
-							</div>
 						</div>
 						<div className="mb-3">
 							<label for="exampleInputPassword1" className="form-label">
