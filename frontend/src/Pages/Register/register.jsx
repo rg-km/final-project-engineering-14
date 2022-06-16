@@ -11,7 +11,7 @@ export default function register() {
           <img className="register-logo img-fluid" src={banner} alt="banner" />
         </div>
         <div className="register-right col-md-5">
-          <div className="card shadow-sm p-3 border-radius-10">
+          <div className="card  p-3 border-radius-10">
             <div className="card-body">
               <h2>Register Account</h2>
               <div className="register-text mt-5">

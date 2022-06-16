@@ -34,6 +34,7 @@
 
 #register-pages .register-right .border-radius-10 {
   border-radius: 10px;
+  border: 0px;
 }
 
 #register-pages .btn-color-theme {
