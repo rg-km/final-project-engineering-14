@@ -3,7 +3,7 @@ import Navbar from "./Navbar/navbar";
 import Carousel from "./Carousel/Carousel";
 import About from "./About/about";
 
-const LandingPage = () => {
+const Landing = () => {
 	return (
 		<>
 			<Navbar />
@@ -13,4 +13,4 @@ const LandingPage = () => {
 	);
 };
 
-export default LandingPage;
+export default Landing;

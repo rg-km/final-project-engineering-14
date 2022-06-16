@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 import Banner from "../../../Assets/Images/Landing-About.png";
 
@@ -17,7 +18,9 @@ const about = () => {
 							eget sit vel egestas volutpat sed. Turpis ut egestas ridiculus a
 							egestas ultrices. Quis proin tortor, elementum pretium interdum.
 						</p>
-						<button>Start Learning</button>
+						<Link to="/login">
+							<button>Start Learning</button>
+						</Link>
 					</div>
 					<div className="about-right col-lg-6">
 						<img

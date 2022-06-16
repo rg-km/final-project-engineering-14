@@ -34,7 +34,7 @@ const Login = () => {
 								id="exampleInputPassword1"
 							/>
 						</div>
-						<div className="mb-3 form-check">
+						{/* <div className="mb-3 form-check">
 							<input
 								type="checkbox"
 								className="form-check-input"
@@ -43,9 +43,9 @@ const Login = () => {
 							<label className="form-check-label" for="exampleCheck1">
 								Check me out
 							</label>
-						</div>
+						</div> */}
 						<button type="submit" className="btn mt-3">
-							Submit
+							Login
 						</button>
 					</form>
 				</div>

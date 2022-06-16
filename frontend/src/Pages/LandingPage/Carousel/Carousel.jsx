@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 import Background from "../../../Assets/Images/Landing-Background-2.png";
 
@@ -20,7 +21,9 @@ const Carousel = () => {
 							Free online courses from the world’s Leading experts. join 10+
 							million Learners today.
 						</p>
-						<button>Join Us Today</button>
+						<Link to="/register">
+							<button>Join Us Today</button>
+						</Link>
 					</div>
 				</div>
 			</div>

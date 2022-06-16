@@ -1,12 +1,17 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import { LandingPage, Login, Register } from "./Pages";
+import { Landing, Login, Register } from "./Pages";
 
-const App = () => {
-  return (
-    <div>
-      <Register />
-    </div>
-  );
+export const App = () => {
+	return (
+		<Routes>
+			<Route path="/" element={<Landing />}>
+				{" "}
+			</Route>
+			<Route path="/login" element={<Login />}></Route>
+			<Route path="/register" element={<Register />}></Route>
+		</Routes>
+	);
 };
 export default App;
