@@ -1,5 +1,6 @@
 import React from "react";
-import { Login, Register } from "./Pages";
+import Navbar from "./Components/Navbar/Navbar";
+import { LandingPage, Login, Register } from "./Pages";
 
 const App = () => {
   return (
