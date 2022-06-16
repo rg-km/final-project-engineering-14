@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "./Components/Navbar/Navbar";
-import { LandingPage, Login } from "./Pages";
+import { LandingPage, Login, Register } from "./Pages";
 
 const App = () => {
-	return (
-		<div>
-			<Login />
-		</div>
-	);
+  return (
+    <div>
+      <Register />
+    </div>
+  );
 };
 export default App;
