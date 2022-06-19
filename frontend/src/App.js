@@ -1,7 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import { Landing, Login, Register, Home, Question, Language } from "./Pages";
+import {
+	Landing,
+	Login,
+	Register,
+	Home,
+	Question,
+	Language,
+	HomePage,
+} from "./Pages";
 
 export const App = () => {
 	return (
@@ -11,7 +19,7 @@ export const App = () => {
 			</Route>
 			<Route path="/login" element={<Login />}></Route>
 			<Route path="/register" element={<Register />}></Route>
-			<Route path="/home" element={<Home />}></Route>
+			<Route path="/HomePage" element={<HomePage />}></Route>
 		</Routes>
 	);
 };
