@@ -1,9 +1,41 @@
 import React from "react";
 import "./register.css";
 import banner from "../../Assets/Images/Register-Images.png";
-import { BsFillEyeFill } from "react-icons/bs";
+import { useState } from "react";
+import axios from "axios";
+// import { Link } from "react-router-dom";
 
-export default function register() {
+export default function Register() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await axios.post(
+        "https://7541-114-10-64-47.ap.ngrok.io/auth/sign-up",
+        {
+          username: username,
+          email: email,
+          password: password,
+          phone: phone,
+        },
+        {
+          headers: {
+            Accept: "/",
+            "User-Agent": "Thunder Client (https://www.thunderclient.com/)",
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <section id="register-pages">
       <div className="row">
@@ -31,6 +63,7 @@ export default function register() {
                       id="name"
                       name="name"
                       placeholder="Enter your username ..."
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
                   <div className="form-group mt-3">
@@ -43,6 +76,7 @@ export default function register() {
                       id="email"
                       name="email"
                       placeholder="Enter your email ..."
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="form-group mt-3">
@@ -56,6 +90,7 @@ export default function register() {
                       id="password"
                       name="password"
                       placeholder="Enter your password ..."
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
                   {/* <div className="input-group-opened">
@@ -76,15 +111,19 @@ export default function register() {
                       id="PhoneNumber"
                       name="PhoneNumber"
                       placeholder="Enter your Phone Number ..."
+                      onChange={(e) => setPhone(e.target.value)}
                     />
                   </div>
                   <div className="d-grid gap-2 mt-3">
+                    {/* <Link to="/login"> */}
                     <button
                       type="submit"
                       className="btn-color-theme btn-lg btn-block p-2 mt-3"
+                      onClick={handleSubmit}
                     >
                       Register
                     </button>
+                    {/* </Link> */}
                   </div>
                   <p className="text-center mt-2">
                     Already have an account?{" "}
