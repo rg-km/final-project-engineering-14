@@ -1,0 +1,23 @@
+#question-page {
+  background-color: #006a7a;
+}
+
+#question-page .container {
+  padding-top: 50px;
+  height: 850px;
+}
+
+#question-page .container h1 {
+  color: white;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+#question-page .container .card .card-tittle .kanan {
+  float: right;
+}
+
+#question-page .container .card .card-text {
+  margin: 30px 30px 30px 30px;
+}
+/*# sourceMappingURL=question.css.map */

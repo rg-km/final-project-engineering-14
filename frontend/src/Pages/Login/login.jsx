@@ -1,8 +1,58 @@
-import * as React from "react";
+// import * as React from "react";
+import { Link } from "react-router-dom";
+import { useState, React } from "react";
+import axios from "axios";
 import "./style.css";
 import banner from "../../Assets/Images/Login-Images.png";
 
 const Login = () => {
+	const [email, setemail] = useState("");
+	const [password, setpassword] = useState("");
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await axios.post(
+				"https://7541-114-10-64-47.ap.ngrok.io/auth/sign-in",
+				{
+					email: email,
+					password: password,
+				},
+				{
+					headers: {
+						Accept: "/",
+						"User-Agent": "Thunder Client (https://www.thunderclient.com/)",
+						"Content-Type": "application/json",
+						"Access-Control-Allow-Origin": "*",
+					},
+					withCredentials: true,
+				}
+			);
+			console.log(response);
+		} catch (error) {
+			console.log(error);
+		}
+
+		// axios
+		// 	.post(
+		// 		`https://7dbd-114-10-64-47.ap.ngrok.io/auth/sign-in`,
+		// 		{
+		// 			email: email,
+		// 			password: password,
+		// 		},
+		// 		{
+		// 			headers: {
+		// 				Accept: "/",
+		// 				"User-Agent": "Thunder Client (https://www.thunderclient.com/)",
+		// 				"Content-Type": "application/json",
+		// 			},
+		// 		}
+		// 	)
+		// 	.then(function (response) {
+		// 		// console.log(username, password);
+		// 	});
+	};
+
 	return (
 		<section id="login-pages">
 			<div className="row">
@@ -14,14 +64,14 @@ const Login = () => {
 						<p>Welcome Back</p>
 						<h2 className="mb-5">Login to your Account</h2>
 						<div className="mb-3">
-							<label for="usernameInput" className="form-label">
-								Username
+							<label for="emailInput" className="form-label">
+								Email
 							</label>
 							<input
 								type="email"
+								value={email}
 								className="form-control"
-								id="usernameInput1"
-								aria-describedby="usernameHelp"
+								onChange={(e) => setemail(e.target.value)}
 							/>
 						</div>
 						<div className="mb-3">
@@ -30,8 +80,9 @@ const Login = () => {
 							</label>
 							<input
 								type="password"
+								value={password}
 								className="form-control"
-								id="exampleInputPassword1"
+								onChange={(e) => setpassword(e.target.value)}
 							/>
 						</div>
 						{/* <div className="mb-3 form-check">
@@ -44,9 +95,11 @@ const Login = () => {
 								Check me out
 							</label>
 						</div> */}
-						<button type="submit" className="btn mt-3">
+						{/* <Link to="/home"> */}
+						<button type="submit" className="btn mt-3" onClick={handleSubmit}>
 							Login
 						</button>
+						{/* </Link> */}
 					</form>
 				</div>
 			</div>
