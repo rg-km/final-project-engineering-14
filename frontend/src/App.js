@@ -1,11 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./Components/Navbar/Navbar";
 import {
 	Landing,
 	Login,
 	Register,
-	Home,
 	Question,
 	Language,
 	HomePage,
@@ -14,7 +12,7 @@ import {
 export const App = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<Language />}>
+			<Route path="/" element={<Landing />}>
 				{" "}
 			</Route>
 			<Route path="/login" element={<Login />}></Route>
