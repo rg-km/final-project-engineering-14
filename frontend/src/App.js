@@ -12,7 +12,7 @@ import {
 export const App = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<Landing />}>
+			<Route path="/" element={<Question />}>
 				{" "}
 			</Route>
 			<Route path="/login" element={<Login />}></Route>

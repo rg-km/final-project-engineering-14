@@ -13,7 +13,7 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			const response = await axios.post(
-				"https://7541-114-10-64-47.ap.ngrok.io/auth/sign-in",
+				"https://f61a-120-188-92-248.ap.ngrok.io/auth/sign-in",
 				{
 					email: email,
 					password: password,
@@ -23,9 +23,7 @@ const Login = () => {
 						Accept: "/",
 						"User-Agent": "Thunder Client (https://www.thunderclient.com/)",
 						"Content-Type": "application/json",
-						"Access-Control-Allow-Origin": "*",
 					},
-					withCredentials: true,
 				}
 			);
 			console.log(response);

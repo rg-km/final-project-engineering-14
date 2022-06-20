@@ -38,7 +38,6 @@ const question = () => {
 										id="radio1"
 										name="optradio"
 										value="option1"
-										checked
 									/>
 									<label class="form-check-label" for="radio1">
 										Option 1
@@ -57,7 +56,13 @@ const question = () => {
 									</label>
 								</div>
 								<div class="form-check">
-									<input type="radio" class="form-check-input" />
+									<input
+										type="radio"
+										class="form-check-input"
+										id="radio3"
+										name="optradio"
+										value="option3"
+									/>
 									<label class="form-check-label">Option 3</label>
 								</div>
 								<button type="submit" class="btn btn-success mt-3">
