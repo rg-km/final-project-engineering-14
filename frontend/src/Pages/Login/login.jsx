@@ -58,9 +58,9 @@ const Login = () => {
 					<img className="w-75 img-fluid mx-auto" src={banner} alt="banner" />
 				</div>
 				<div className="login-right col-lg-6 my-auto">
+					<p>Welcome Back</p>
+					<h2 className="mb-5">Login to your Account</h2>
 					<form>
-						<p>Welcome Back</p>
-						<h2 className="mb-5">Login to your Account</h2>
 						<div className="mb-3">
 							<label for="emailInput" className="form-label">
 								Email
