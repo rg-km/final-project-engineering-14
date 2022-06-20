@@ -1,42 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
 :root {
-  --main-color: #006a7a;
-  --button-color: #ffcc48;
+	--main-color: #006a7a;
+	--button-color: #ffcc48;
 
-  --main-font: "Poppins", sans-serif;
+	--main-font: "Poppins", sans-serif;
 }
 
 #register-pages {
-  max-width: max-content;
-  margin: 0px 0px 0px 0px;
+	.register-right {
+		p {
+			font-style: normal;
+			font-weight: 400;
+			font-size: 18px;
+			line-height: 24px;
+			color: #3a3535;
+		}
+		.form-control {
+			width: 500px;
+		}
+		button {
+			width: 500px;
+			height: 54px;
+			left: -1px;
+			top: 72px;
 
-  .register-left {
-    background-color: #006a7a;
-    left: 2px;
-    top: -1px;
-
-    .register-logo {
-      width: 60%;
-      height: 60%;
-      display: flex;
-      margin: 120px auto 0 80px;
-    }
-  }
-
-  .register-right {
-    font-family: var(--main-font);
-    margin: 0px 0px 0px 80px;
-
-    .border-radius-10 {
-      border-radius: 10px;
-      border: 0px;
-    }
-  }
-
-  .btn-color-theme {
-    color: black !important;
-    background-color: #ffcc48;
-    border: 0px;
-  }
+			background: #ffcc48;
+			color: #000;
+			border-radius: 5px;
+			border: 0px;
+		}
+		.have-account {
+			margin-left: 130px;
+		}
+	}
 }
