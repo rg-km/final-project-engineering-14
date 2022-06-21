@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+#footer {
+  background-color: #006a7a;
+  font-family: "Poppins, sans-serif";
+  .double-logo {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .pages-link {
+    text-decoration: none;
+    color: white;
+  }
+  .copyright {
+    h5 {
+      font-size: 16px;
+    }
+  }
+}
