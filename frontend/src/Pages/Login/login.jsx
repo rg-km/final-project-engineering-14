@@ -1,13 +1,12 @@
 // import * as React from "react";
-import React, { useState, useRef, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 
 import "./style.css";
 import banner from "../../Assets/Images/Login-Images.png";
 
 export const Login = () => {
-	const params = useParams();
 	const navigate = useNavigate();
 
 	const emailInputRef = useRef();
@@ -17,8 +16,8 @@ export const Login = () => {
 
 	const isLoggedIn = authCtx.isLoggedIn;
 
-	{
-		!isLoggedIn && navigate("/HomePage");
+	if (!isLoggedIn) {
+		navigate("/HomePage");
 	}
 
 	const handleSubmit = (event) => {
@@ -60,7 +59,8 @@ export const Login = () => {
 				authCtx.login(data.idToken);
 			})
 			.catch((err) => {
-				alert(err.message);
+				// alert(err.message);
+				alert("Data yang anda masukkan salah, silahkan di cek!");
 			});
 	};
 
