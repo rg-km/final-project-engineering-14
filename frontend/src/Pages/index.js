@@ -4,3 +4,4 @@ export { default as Register } from "./Register/register";
 export { default as Question } from "./Question/question";
 export { default as Language } from "./Language/language";
 export { default as HomePage } from "./HomePage/HomePage";
+export { default as Level } from "./Level/Level";

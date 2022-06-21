@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+#level-pages {
+  background-color: #006a7a;
+  font-family: "Poppins, sans-serif";
+
+  overflow-y: hidden;
+  .level-image {
+    margin: 58px 0px 0px 0px;
+    // width: 738px;
+    // height: 567px;
+    width: 738px;
+    height: 567px;
+  }
+
+  .level-body {
+    h1 {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 50px;
+      line-height: 75px;
+      color: #ffffff;
+
+      span {
+        color: #ffcc48;
+      }
+    }
+  }
+
+  .card-rank {
+    // margin: 0px 0px 0px 520px;
+    padding: 20px 0px 0px 150px;
+    width: 32rem;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    border-radius: 12px;
+    border: 0px;
+  }
+  .recommendation {
+    // margin: 0px 0px 0px 580px;
+    padding: 130px 0px 0px 180px;
+    button {
+      font-size: 20px;
+      font-weight: 700;
+      width: 300px;
+      height: 69px;
+      background: #ffcc48;
+      box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      border: 0px;
+    }
+  }
+}
