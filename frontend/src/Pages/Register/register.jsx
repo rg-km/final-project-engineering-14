@@ -15,7 +15,7 @@ export default function Register() {
 		e.preventDefault();
 		try {
 			let res = await axios.post(
-				"https://f61a-120-188-92-248.ap.ngrok.io/auth/sign-up",
+				"https://d440-120-188-38-92.ap.ngrok.io/auth/sign-up",
 				{
 					username: username,
 					email: email,
@@ -25,7 +25,6 @@ export default function Register() {
 				{
 					headers: {
 						Accept: "/",
-						"User-Agent": "Thunder Client (https://www.thunderclient.com/)",
 						"Content-Type": "application/json",
 					},
 				}
