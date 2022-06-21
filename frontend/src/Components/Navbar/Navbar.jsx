@@ -38,7 +38,18 @@ function HomeNavbar() {
               </Nav>
               <div className="card-profile">
                 <Card style={{ width: "200px", height: "60px" }}>
-                  <Image className="card-avatar" src={Avatar} roundedCircle />
+                  <Row>
+                    <Col>
+                      <Image
+                        className="card-avatar"
+                        src={Avatar}
+                        roundedCircle
+                      />
+                    </Col>
+                    <Col className="col-8 my-auto">
+                      <h5>Rahman Budi</h5>
+                    </Col>
+                  </Row>
                 </Card>
               </div>
             </Navbar.Collapse>
