@@ -20,6 +20,8 @@ export const App = () => {
       <Route path="/register" element={<Register />}></Route>
       <Route path="/HomePage" element={<HomePage />}></Route>
       <Route path="/Level" element={<Level />}></Route>
+      <Route path="/Language" element={<Language />}></Route>
+      <Route path="/Question" element={<Question />}></Route>
     </Routes>
   );
 };
