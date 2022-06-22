@@ -8,6 +8,7 @@ import {
   Level,
   Language,
   HomePage,
+  Dashboard,
 } from "./Pages";
 
 export const App = () => {
@@ -16,6 +17,7 @@ export const App = () => {
       <Route path="/" element={<Landing />}>
         {" "}
       </Route>
+      <Route path="/Dashboard" element={<Dashboard />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/HomePage" element={<HomePage />}></Route>
