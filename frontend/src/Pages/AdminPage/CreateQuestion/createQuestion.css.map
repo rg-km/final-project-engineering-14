@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "version": 3,
     "mappings": "",
@@ -6,4 +7,14 @@
     ],
     "names": [],
     "file": "createQuestion.css"
+=======
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACf,UAAU,EAAE,MAAM;EAClB,gBAAgB,EAAE,OAAO;EACzB,MAAM,EAAE,KAAK;CAuBd;;AA1BD,AAKE,gBALc,CAKd,kBAAkB,CAAC;EACjB,WAAW,EAAE,IAAI;EACjB,KAAK,EAAE,KAAK;CAkBb;;AAzBH,AASI,gBATY,CAKd,kBAAkB,CAIhB,WAAW,CAAC;EACV,SAAS,EAAE,IAAI;CAChB;;AAXL,AAYI,gBAZY,CAKd,kBAAkB,CAOhB,WAAW,CAAC;EACV,KAAK,EAAE,KAAK;CACb;;AAdL,AAgBI,gBAhBY,CAKd,kBAAkB,CAWhB,UAAU,CAAC;EACT,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;CACd;;AAnBL,AAqBI,gBArBY,CAKd,kBAAkB,CAgBhB,OAAO,CAAC;EACN,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,IAAI;CACb",
+    "sources": [
+        "createQuestion.scss"
+    ],
+    "names": [],
+    "file": "createQuestion.css"
+>>>>>>> 60e79c5a4a1ca2f7c740c9df40c294609c2df025
 }

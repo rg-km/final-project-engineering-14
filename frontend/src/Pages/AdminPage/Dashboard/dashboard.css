@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 #dashboard-pages {
   background-color: #006a7a;
@@ -92,4 +93,42 @@
   font-size: 18px;
   color: black;
 }
+=======
+#dashboard-pages {
+  background-color: #006a7a;
+  height: 100vh;
+}
+
+#dashboard-pages h1 {
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 75px;
+}
+
+#dashboard-pages .card {
+  width: 150px;
+  height: 50px;
+}
+
+#dashboard-pages .button-create {
+  width: 150px;
+  height: 50px;
+  float: right;
+}
+
+#dashboard-pages .table {
+  text-align: center;
+  background-color: white;
+  border-radius: 20px;
+  border: 0px;
+}
+
+#dashboard-pages .table .table-body,
+#dashboard-pages .table tr,
+#dashboard-pages .table td {
+  border: 0px;
+}
+>>>>>>> 60e79c5a4a1ca2f7c740c9df40c294609c2df025
 /*# sourceMappingURL=dashboard.css.map */
