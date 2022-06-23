@@ -29,7 +29,7 @@ export const App = () => {
 				<Route path="/HomePage" element={<HomePage />}></Route>
 				<Route path="/Level" element={<Level />}></Route>
 				<Route path="/Language" element={<Language />}></Route>
-				<Route path="/Question" element={<Question />}></Route>
+				<Route path="/CreateQuestion" element={<CreateQuestion />}></Route>
 			</Route>
 
 			<Route path="*" element={<Navigate to="/" />}></Route>

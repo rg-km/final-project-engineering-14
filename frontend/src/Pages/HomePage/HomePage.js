@@ -1,12 +1,12 @@
 import React from "react";
 import Main from "./Main/Main";
-import HomeNavbar from "./Navbar/HomeNavbar";
+import Navbar from "../../Components/Navbar/Navbar";
 import LearningPath from "./LearningPath/LearningPath";
 
 function HomePage() {
 	return (
 		<>
-			<HomeNavbar />
+			<Navbar />
 			<Main />
 			<LearningPath />
 		</>
