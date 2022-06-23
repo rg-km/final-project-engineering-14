@@ -1,7 +1,6 @@
 package config
 
 import (
-	"context"
 	"database/sql"
 	"log"
 	"os"
@@ -34,10 +33,7 @@ func DBConnect() (*sql.DB, error) {
 	db.SetConnMaxIdleTime(10 * time.Minute)
 	db.SetConnMaxLifetime(60 * time.Minute)
 
-	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancelfunc()
-
-	err = db.PingContext(ctx)
+	err = db.Ping()
 	helper.PanicIfErrorWithMessage("Erorr when ping database : ", err)
 
 	log.Printf("Connected to DB %s successfully\n", dbname)
