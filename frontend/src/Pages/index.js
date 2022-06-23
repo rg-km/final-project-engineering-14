@@ -6,4 +6,4 @@ export { default as Question } from "./Question/question";
 export { default as Language } from "./Language/language";
 export { default as HomePage } from "./HomePage/HomePage";
 export { default as Level } from "./Level/Level";
-export { default as CreateQuestion } from "./CreateQuestion/createQuestion";
+export { default as CreateQuestion } from "./AdminPage/CreateQuestion/createQuestion";
