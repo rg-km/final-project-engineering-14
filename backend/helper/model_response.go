@@ -15,6 +15,7 @@ func ToRegisterResponse(user domain.UserDomain, email string) web.RegisterRespon
 
 func ToLoginResponse(user domain.UserDomain, token string) web.LoginResponse {
 	return web.LoginResponse{
+		Role:  user.Role,
 		Token: token,
 	}
 }
