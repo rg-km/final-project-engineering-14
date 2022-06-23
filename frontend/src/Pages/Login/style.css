@@ -1,0 +1,23 @@
+#login-pages .login-right p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #3a3535;
+}
+
+#login-pages .login-right .form-control {
+  width: 500px;
+}
+
+#login-pages .login-right button {
+  width: 500px;
+  height: 54px;
+  left: -1px;
+  top: 72px;
+  background: #ffcc48;
+  color: #000;
+  border-radius: 5px;
+  border: 0px;
+}
+/*# sourceMappingURL=style.css.map */

@@ -8,19 +8,43 @@ import (
 )
 
 type AuthService interface {
-	Create(ctx context.Context, request web.RegisterRequest) (web.RegisterResponse, error)
-	// Login(ctx context.Context, request web.LoginRequest) (web.LoginResponse, error)
-	GenerateToken(ctx context.Context, email, password string) (web.LoginResponse, error)
-	ParseToken(ctx context.Context, token string) (uint32, error)
-	Logout(ctx context.Context, userId uint32) (bool, error)
+	Create(request web.RegisterRequest, email string) (web.RegisterResponse, error)
+	GenerateToken(email, password string) (web.LoginResponse, error)
+	ParseToken(ctx context.Context, token string) (int32, string, error)
+	Logout(userId int32) (bool, error)
+}
+
+type FrontendService interface {
+	GetProgrammingLanguanges() ([]web.ProgrammingLanguageResponse, error)
+	GetQuestionByProgrammingLanguage(proglangId, perPage, page int32) ([]web.QuestionCreateResponse, error)
+	PostAnswersAttempt(userId int32, answers web.AnswersAttemptRequest) (web.TotalAnswerAttemptResponse, error)
+}
+
+type BackendService interface {
+	CreateAdminQuestion(userId int32, question web.QuestionRequest) (web.QuestionCreateResponse, error)
+	GetAdminQuestions() ([]web.QuestionResponse, error)
+	GetCountQuestions() ([]web.CountQuestionResponse, error)
+	UpdateAdminQuestion(question web.QuestionRequest, questionId int32) (bool, error)
+	DeleteAdminQuestion(questionId int32) (bool, error)
 }
 
 type Service struct {
-	AuthService AuthService
+	AuthService     AuthService
+	FrontendService FrontendService
+	BackendService  BackendService
 }
 
 func NewService(repository *repository.Repository) *Service {
 	return &Service{
 		AuthService: NewAuthService(repository.AuthRepository),
+		FrontendService: NewFrontendService(
+			repository.AuthRepository,
+			repository.FrontendRepository,
+			repository.BackendRepository,
+		),
+		BackendService: NewBackendService(
+			repository.BackendRepository,
+			repository.FrontendRepository,
+		),
 	}
 }

@@ -1,0 +1,24 @@
+#navbar-landing {
+  background-color: #006a7a;
+
+  .right-content {
+    .login {
+      width: 105px;
+      height: 50px;
+
+      background: #ffffff;
+      border: 1px solid rgba(69, 66, 66, 0.8);
+      box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+    }
+    .signup {
+      width: 105px;
+      height: 50px;
+
+      background: #ffcc48;
+      border: 1px solid rgba(69, 66, 66, 0.8);
+      box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+    }
+  }
+}

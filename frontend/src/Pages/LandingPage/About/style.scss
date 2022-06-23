@@ -1,0 +1,48 @@
+#about-pages {
+  padding: 0;
+  margin: 0;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  .about-left {
+    h1 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 60px;
+
+      color: #000000;
+
+      span {
+        color: #00798b;
+      }
+    }
+    p {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 30px;
+      text-align: justify;
+
+      color: #000000;
+    }
+    button {
+      width: 209px;
+      height: 69px;
+
+      background: #ffcc48;
+      box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      border: 0px;
+
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      text-align: center;
+      color: #474242;
+    }
+  }
+  .about-right {
+    height: 500px;
+  }
+}

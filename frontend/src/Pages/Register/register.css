@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+:root {
+  --main-color: #006a7a;
+  --button-color: #ffcc48;
+  --main-font: "Poppins", sans-serif;
+}
+
+#register-pages .register-right p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #3a3535;
+}
+
+#register-pages .register-right .form-control {
+  width: 500px;
+}
+
+#register-pages .register-right button {
+  width: 500px;
+  height: 54px;
+  left: -1px;
+  top: 72px;
+  background: #ffcc48;
+  color: #000;
+  border-radius: 5px;
+  border: 0px;
+}
+
+#register-pages .register-right .have-account {
+  margin-left: 130px;
+}
+/*# sourceMappingURL=register.css.map */
