@@ -15,7 +15,7 @@ export default function Register() {
 		e.preventDefault();
 		try {
 			let res = await axios.post(
-				"https://d440-120-188-38-92.ap.ngrok.io/auth/sign-up",
+				"https://7ac8-114-122-75-150.ap.ngrok.io/auth/sign-up",
 				{
 					username: username,
 					email: email,
