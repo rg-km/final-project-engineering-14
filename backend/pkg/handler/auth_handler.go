@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/julienschmidt/httprouter"
 	"github.com/rg-km/final-project-engineering-14/backend/helper"
 	"github.com/rg-km/final-project-engineering-14/backend/model/web"
 	"github.com/rg-km/final-project-engineering-14/backend/pkg/service"
 )
 
-func (handler *Handler) signUp(writer http.ResponseWriter, request *http.Request) {
-	handler.AllowOrigin(writer, request)
+func (handler *Handler) signUp(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	var registerRequest web.RegisterRequest
 	err := json.NewDecoder(request.Body).Decode(&registerRequest)
 	if err != nil {
@@ -24,8 +24,7 @@ func (handler *Handler) signUp(writer http.ResponseWriter, request *http.Request
 		return
 	}
 
-	registerRequest.PrepareRegister()
-	err = registerRequest.ValidateRegister("create")
+	err = registerRequest.ValidateRegister()
 	if err != nil {
 		writer.WriteHeader(http.StatusUnprocessableEntity)
 		json.NewEncoder(writer).Encode(web.WebResponse{
@@ -36,8 +35,8 @@ func (handler *Handler) signUp(writer http.ResponseWriter, request *http.Request
 		return
 	}
 
-	registerResponse, err := handler.services.AuthService.Create(
-		request.Context(), registerRequest,
+	registerResponse, err := handler.service.AuthService.Create(
+		registerRequest, registerRequest.Email,
 	)
 	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
@@ -51,15 +50,14 @@ func (handler *Handler) signUp(writer http.ResponseWriter, request *http.Request
 
 	webResponse := web.WebResponse{
 		Status:  http.StatusCreated,
-		Message: http.StatusText(http.StatusCreated),
+		Message: "CREATE OK",
 		Data:    registerResponse,
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request) {
-	handler.AllowOrigin(writer, request)
+func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	var loginRequest web.LoginRequest
 	err := json.NewDecoder(request.Body).Decode(&loginRequest)
 	if err != nil {
@@ -72,8 +70,7 @@ func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request
 		return
 	}
 
-	loginRequest.PrepareLogin()
-	err = loginRequest.ValidateLogin("login")
+	err = loginRequest.ValidateLogin()
 	if err != nil {
 		writer.WriteHeader(http.StatusUnprocessableEntity)
 		json.NewEncoder(writer).Encode(web.WebResponse{
@@ -84,8 +81,8 @@ func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request
 		return
 	}
 
-	userLoginResponse, err := handler.services.AuthService.GenerateToken(
-		request.Context(), loginRequest.Email, loginRequest.Password,
+	userLoginResponse, err := handler.service.AuthService.GenerateToken(
+		loginRequest.Email, loginRequest.Password,
 	)
 	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
@@ -99,7 +96,7 @@ func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request
 
 	webResponse := web.WebResponse{
 		Status:  http.StatusOK,
-		Message: http.StatusText(http.StatusOK),
+		Message: "LOGIN OK",
 		Data:    userLoginResponse,
 	}
 
@@ -113,40 +110,13 @@ func (handler *Handler) signIn(writer http.ResponseWriter, request *http.Request
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
-func (handler *Handler) signOut(writer http.ResponseWriter, request *http.Request) {
-	handler.AllowOrigin(writer, request)
-	token, err := request.Cookie("token")
-	if err != nil {
-		if err == http.ErrNoCookie {
-			writer.WriteHeader(http.StatusUnauthorized)
-			json.NewEncoder(writer).Encode(web.WebResponse{
-				Status:  http.StatusUnauthorized,
-				Message: http.StatusText(http.StatusUnauthorized),
-				Data:    "No token provided",
-			})
-			return
-		}
-		writer.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(writer).Encode(web.WebResponse{
-			Status:  http.StatusBadRequest,
-			Message: "Invalid request body",
-			Data:    err.Error(),
-		})
-		return
-	}
+func (handler *Handler) signOut(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	token, _ := request.Cookie("token")
 
-	if token.Value == "" {
-		writer.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(writer).Encode(web.WebResponse{
-			Status:  http.StatusUnauthorized,
-			Message: http.StatusText(http.StatusUnauthorized),
-			Data:    "No token provided",
-		})
-		return
-	}
-	userId, _ := handler.services.AuthService.ParseToken(request.Context(), token.Value)
-
-	_, err = handler.services.AuthService.Logout(request.Context(), uint32(userId))
+	userId, _, _ := handler.service.AuthService.ParseToken(
+		request.Context(), token.Value,
+	)
+	_, err := handler.service.AuthService.Logout(int32(userId))
 	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(writer).Encode(web.WebResponse{
@@ -156,19 +126,18 @@ func (handler *Handler) signOut(writer http.ResponseWriter, request *http.Reques
 		})
 		return
 	}
+
 	cookie := http.Cookie{
-		Name:     "token",
-		Value:    "",
-		Expires:  time.Now().Add(-time.Hour),
-		HttpOnly: true,
-		MaxAge:   -1,
+		Name:   "token",
+		Value:  "",
+		MaxAge: -1,
 	}
 
 	http.SetCookie(writer, &cookie)
 
 	webResponse := web.WebResponse{
 		Status:  http.StatusOK,
-		Message: http.StatusText(http.StatusOK),
+		Message: "LOGOUT OK",
 		Data:    "Successfully logged out",
 	}
 
