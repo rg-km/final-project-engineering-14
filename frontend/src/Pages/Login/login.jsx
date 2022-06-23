@@ -14,9 +14,9 @@ export const Login = () => {
 
 	const authCtx = useContext(AuthContext);
 
-	const isLoggedIn = authCtx.isLoggedIn;
-
-	if (isLoggedIn) {
+	if (authCtx.role === "admin") {
+		navigate("/Dashboard");
+	} else if (authCtx.isLoggedIn) {
 		navigate("/HomePage");
 	}
 
@@ -27,7 +27,7 @@ export const Login = () => {
 		const enteredPassword = passwordInputRef.current.value;
 
 		let url;
-		url = "https://7ac8-114-122-75-150.ap.ngrok.io/auth/sign-in";
+		url = "https://d376-120-188-37-170.ap.ngrok.io/auth/sign-in";
 		fetch(url, {
 			method: "POST",
 			body: JSON.stringify({
@@ -55,8 +55,8 @@ export const Login = () => {
 				}
 			})
 			.then((data) => {
-				// console.log(data);
-				authCtx.login(data.idToken, data.idRole);
+				// console.log(data.data.token);
+				authCtx.login(data.data.token, data.data.role);
 			})
 			.catch((err) => {
 				// alert(err.message);

@@ -3,9 +3,12 @@ import "./register.css";
 import banner from "../../Assets/Images/Register-Images.png";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export default function Register() {
+	const navigate = useNavigate();
+
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -15,7 +18,7 @@ export default function Register() {
 		e.preventDefault();
 		try {
 			let res = await axios.post(
-				"https://7ac8-114-122-75-150.ap.ngrok.io/auth/sign-up",
+				"https://d376-120-188-37-170.ap.ngrok.io/auth/sign-up",
 				{
 					username: username,
 					email: email,
@@ -30,8 +33,13 @@ export default function Register() {
 				}
 			);
 			console.log(res);
+			if (res.status === 200) {
+				navigate("/");
+			}
 		} catch (error) {
-			console.log(error);
+			alert(
+				"Username / Email Sudah terdaftar, Silahkan Periksa Data Anda Kembali!"
+			);
 		}
 	};
 	return (

@@ -10,13 +10,9 @@ function PrivateRoute() {
 	const navigate = useNavigate();
 	// let location = useLocation();
 	useEffect(() => {
-		if (!user.isLoggedIn) {
-			// console.log("navigate login");
-			navigate("/login");
-		}
-		if (user.role === "admin") {
+		if (!user.role === "admin") {
 			// console.log("admin login");
-			navigate("/Dashboard");
+			navigate("/HomePage");
 		}
 	}, []);
 	return (
