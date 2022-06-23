@@ -10,7 +10,9 @@ function PrivateRoute() {
 	const navigate = useNavigate();
 	// let location = useLocation();
 	useEffect(() => {
-		if (!user.role === "admin") {
+		const role = localStorage.getItem("role");
+
+		if (!user.role === "admin" && !role) {
 			// console.log("admin login");
 			navigate("/HomePage");
 		}

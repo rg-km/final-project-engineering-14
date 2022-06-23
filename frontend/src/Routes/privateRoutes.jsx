@@ -10,7 +10,9 @@ function PrivateRoute() {
 	const navigate = useNavigate();
 	// let location = useLocation();
 	useEffect(() => {
-		if (!user.isLoggedIn) {
+		const token = localStorage.getItem("token");
+
+		if (!user.isLoggedIn && !token) {
 			// console.log("navigate login");
 			navigate("/login");
 		}

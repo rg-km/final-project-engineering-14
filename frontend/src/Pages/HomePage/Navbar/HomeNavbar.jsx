@@ -41,7 +41,7 @@ function HomeNavbar() {
 								<Nav.Link href="" className="text-light pe-3">
 									Home
 								</Nav.Link>
-								<Nav.Link href="#link" className="text-light pe-3">
+								<Nav.Link href="#link" className="text-light pe-4">
 									Learning Path
 								</Nav.Link>
 								<Nav className="text-light">
