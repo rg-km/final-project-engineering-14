@@ -3,15 +3,39 @@ package web
 type RegisterResponse struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
-	Password string `json:"password"`
 	Phone    string `json:"phone"`
 }
 
 type LoginResponse struct {
-	Email    string `json:"email"`
+	Token string `json:"token"`
+}
+
+type ProgrammingLanguageResponse struct {
+	Name string `json:"name"`
+}
+
+type QuestionCreateResponse struct {
+	ProgrammingLanguange string           `json:"programming_languange"`
+	Question             string           `json:"question"`
+	Answer               []AnswerResponse `json:"answer"`
+}
+
+type QuestionResponse struct {
+	Question             string `json:"question"`
+	ProgrammingLanguange string `json:"programming_languange"`
+}
+
+type AnswerResponse struct {
+	Answer string `json:"answer"`
+}
+
+type CountQuestionResponse struct {
+	ProgrammingLanguage string `json:"programming_languange"`
+	TotalQuestion       uint32 `json:"total_question"`
+}
+
+type TotalAnswerAttemptResponse struct {
 	Username string `json:"username"`
-	Password string `json:"password"`
-	Phone    string `json:"phone"`
-	Role     string `json:"role"`
-	Token    string `json: "token"`
+	Level    string `json:"level"`
+	Score    int32  `json:"total"`
 }
