@@ -1,10 +1,8 @@
 package migrate
 
 import (
-	"context"
 	"database/sql"
 	"log"
-	"time"
 
 	"github.com/rg-km/final-project-engineering-14/backend/helper"
 )
@@ -22,12 +20,38 @@ func Migrate(db *sql.DB) {
 		created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP 
 	);
+
+	CREATE TABLE IF NOT EXISTS programming_languanges (
+		id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+		name VARCHAR(15) NOT NULL,
+		created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+	);
+
+	CREATE TABLE IF NOT EXISTS questions (
+		id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+		question VARCHAR(255) NOT NULL,
+		proglang_id INTEGER NOT NULL,
+		created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		FOREIGN KEY (proglang_id) REFERENCES programming_languanges(id)
+	);
+
+	CREATE TABLE IF NOT EXISTS answers (
+		id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+		answer VARCHAR(50) NOT NULL,
+		created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+	);
+
+	CREATE TABLE IF NOT EXISTS answers_attempts (
+		id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+		user_id INTEGER NOT NULL,
+		answer VARCHAR(50) NOT NULL,
+		FOREIGN KEY (user_id) REFERENCES users(id)
+	);
 	`
-
-	ctx, cancelfunc := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancelfunc()
-
-	_, err := db.ExecContext(ctx, query)
+	_, err := db.Exec(query)
 	helper.PanicIfErrorWithMessage("Error when migrate with error:", err)
 
 	log.Println("Migration success")

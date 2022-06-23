@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"time"
 
@@ -16,7 +15,7 @@ import (
 
 const (
 	signingKey   = "secret_key"
-	TokenExpires = time.Minute * 20
+	TokenExpires = time.Minute * 30
 )
 
 type AuthServiceSQLite struct {
@@ -27,7 +26,7 @@ type Claims struct {
 	jwt.StandardClaims
 	Email  string `json:"email"`
 	Role   string `json:"role"`
-	UserId uint32 `json:"user_id"`
+	UserId int32  `json:"user_id"`
 }
 
 func NewAuthService(repository repository.AuthRepository) *AuthServiceSQLite {
@@ -36,13 +35,13 @@ func NewAuthService(repository repository.AuthRepository) *AuthServiceSQLite {
 	}
 }
 
-func (service *AuthServiceSQLite) Create(ctx context.Context, request web.RegisterRequest) (web.RegisterResponse, error) {
+func (service *AuthServiceSQLite) Create(request web.RegisterRequest, email string) (web.RegisterResponse, error) {
 	hashed := security.GeneratePasswordHash(request.Password)
 	timeLoc, _ := time.LoadLocation("Asia/Jakarta")
 
-	user := domain.UserDomain{
+	userDomain := domain.UserDomain{
 		Username:  request.Username,
-		Email:     request.Email,
+		Email:     "",
 		Password:  hashed,
 		Phone:     request.Phone,
 		Role:      "guest",
@@ -51,33 +50,23 @@ func (service *AuthServiceSQLite) Create(ctx context.Context, request web.Regist
 		UpdatedAt: time.Now().In(timeLoc),
 	}
 
-	userResult, err := service.repository.Save(ctx, user)
-	helper.PanicIfError(err)
+	userResult, err := service.repository.Save(userDomain, email)
+	if err != nil {
+		return web.RegisterResponse{}, err
+	}
 
-	return helper.ToRegisterResponse(userResult), nil
+	return helper.ToRegisterResponse(userResult, email), nil
 }
 
-// func (service *AuthServiceSQLite) Login(ctx context.Context, request web.LoginRequest) (web.LoginResponse, error) {
-// 	user, err := service.repository.GetUser(ctx, request.Email, request.Password)
-// 	helper.PanicIfError(err)
-
-// 	if user.IsLogin {
-// 		return web.LoginResponse{}, errors.New("user already login")
-// 	}
-
-// 	return helper.ToLoginResponse(user), nil
-// }
-
-func (service *AuthServiceSQLite) GenerateToken(ctx context.Context, email, password string) (web.LoginResponse, error) {
+func (service *AuthServiceSQLite) GenerateToken(email, password string) (web.LoginResponse, error) {
 	user, err := service.repository.GetUser(
-		ctx, email, security.GeneratePasswordHash(password))
-	if err != nil {
-		return web.LoginResponse{}, errors.New("login failed")
-	}
+		email, security.GeneratePasswordHash(password),
+	)
+	helper.PanicIfError(err)
 
-	if user.IsLogin {
-		return web.LoginResponse{}, errors.New("already login")
-	}
+	// if user.IsLogin {
+	// 	return web.LoginResponse{}, errors.New("already login")
+	// }
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &Claims{
 		StandardClaims: jwt.StandardClaims{
@@ -96,7 +85,7 @@ func (service *AuthServiceSQLite) GenerateToken(ctx context.Context, email, pass
 	return helper.ToLoginResponse(user, tokenString), nil
 }
 
-func (service *AuthServiceSQLite) ParseToken(ctx context.Context, token string) (uint32, error) {
+func (service *AuthServiceSQLite) ParseToken(ctx context.Context, token string) (int32, string, error) {
 	claims := &Claims{}
 	tkn, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -105,17 +94,22 @@ func (service *AuthServiceSQLite) ParseToken(ctx context.Context, token string) 
 		return []byte(signingKey), nil
 	})
 	if err != nil {
-		return 0, err
+		return 0, "", err
 	}
 
 	claims, ok := tkn.Claims.(*Claims)
 	if !ok || !tkn.Valid {
-		return 0, fmt.Errorf("invalid token")
+		return 0, "", fmt.Errorf("invalid token")
 	}
 
-	return claims.UserId, nil
+	newCtx := context.WithValue(ctx, "email", claims.Email)
+	ctx = context.WithValue(newCtx, "role", claims.Role)
+	ctx = context.WithValue(ctx, "user_id", claims.UserId)
+	ctx = context.WithValue(newCtx, "props", claims)
+
+	return claims.UserId, claims.Role, nil
 }
 
-func (service *AuthServiceSQLite) Logout(ctx context.Context, userId uint32) (bool, error) {
-	return service.repository.Logout(ctx, userId)
+func (service *AuthServiceSQLite) Logout(userId int32) (bool, error) {
+	return service.repository.Logout(userId)
 }

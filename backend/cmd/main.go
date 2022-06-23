@@ -28,7 +28,7 @@ func main() {
 	handlers := handler.NewHandler(services)
 
 	srv := new(backend.Server)
-	if err := srv.Run("8080", handlers.InitRoutes()); err != nil {
+	if err := srv.Run("3000", handlers.InitRoutes()); err != nil {
 		log.Fatal("Error occured while running server: ", err.Error())
 	}
 }

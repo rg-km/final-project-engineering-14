@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"context"
 	"database/sql"
+	"errors"
 
 	"github.com/rg-km/final-project-engineering-14/backend/helper"
 	"github.com/rg-km/final-project-engineering-14/backend/model/domain"
@@ -18,102 +18,77 @@ func NewAuthRepository(db *sql.DB) *AuthRepositorySQLite {
 	}
 }
 
-func (repo *AuthRepositorySQLite) Save(ctx context.Context, user domain.UserDomain) (domain.UserDomain, error) {
-	query := `
-	INSERT INTO users 
-	(username, email, password, phone, role, is_login, created_at, updated_at)
-	VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+func (repo *AuthRepositorySQLite) Save(userReq domain.UserDomain, email string) (domain.UserDomain, error) {
+	var user domain.UserDomain
 
-	done := make(chan bool, 1)
-	go func(ch chan<- bool) {
-		defer close(ch)
-
-		stmt, err := repo.DB.PrepareContext(ctx, query)
-		if err != nil {
-			ch <- false
-			return
-		}
-		defer stmt.Close()
-
-		result, err := stmt.ExecContext(ctx,
-			user.Username, user.Email, user.Password, user.Phone,
-			user.Role, user.IsLogin, user.CreatedAt, user.UpdatedAt,
-		)
-		if err != nil {
-			ch <- false
-			return
-		}
-
-		id, err := result.LastInsertId()
-		if err != nil {
-			ch <- false
-			return
-		}
-
-		user.Id = uint32(id)
-		ch <- true
-	}(done)
-
-	if helper.OK(done) {
-		return user, nil
+	query := `SELECT id, email FROM users WHERE email = ?`
+	row := repo.DB.QueryRow(query, email)
+	err := row.Scan(&user.Id, &user.Email)
+	if err == nil {
+		return user, errors.New("email already exists")
 	}
 
-	return domain.UserDomain{}, nil
-}
+	query = `
+	INSERT INTO users 
+	(username, email, password, phone, role, is_login, created_at, updated_at)
+	VALUES (?, ?, ?, ?, ?, ?, ?, ?);`
 
-func (repo *AuthRepositorySQLite) GetUser(ctx context.Context, email, password string) (domain.UserDomain, error) {
-	tx, err := repo.DB.Begin()
+	result, err := repo.DB.Exec(query,
+		userReq.Username, email, userReq.Password, userReq.Phone, userReq.Role,
+		userReq.IsLogin, userReq.CreatedAt, userReq.UpdatedAt,
+	)
 	helper.PanicIfError(err)
 
-	querySelectALl := ` 
+	id, err := result.LastInsertId()
+	helper.PanicIfError(err)
+
+	user.Id = int32(id)
+	return userReq, nil
+}
+
+func (repo *AuthRepositorySQLite) GetUser(email, password string) (domain.UserDomain, error) {
+	query := ` 
 	SELECT id, username, email, password, phone, role, is_login 
 	FROM users 
 	WHERE email = ? AND password = ?`
 
 	var user domain.UserDomain
-	stmt, err := tx.PrepareContext(ctx, querySelectALl)
-	helper.PanicIfError(err)
-	defer stmt.Close()
-
-	row := stmt.QueryRowContext(ctx, email, password)
-	err = row.Scan(
+	row := repo.DB.QueryRow(query, email, password)
+	err := row.Scan(
 		&user.Id, &user.Username, &user.Email, &user.Password,
 		&user.Phone, &user.Role, &user.IsLogin,
 	)
 	if err != nil {
-		tx.Rollback()
-		return domain.UserDomain{}, err
+		return user, errors.New("login failed")
 	}
 
-	queryUpdate := `UPDATE users SET is_login = true WHERE id = ?`
-	stmt, err = tx.PrepareContext(ctx, queryUpdate)
+	query = `UPDATE users SET is_login = true WHERE id = ?`
+	_, err = repo.DB.Exec(query, user.Id)
 	helper.PanicIfError(err)
-	defer stmt.Close()
 
-	_, err = stmt.ExecContext(ctx, user.Id)
-	if err != nil {
-		tx.Rollback()
-		return domain.UserDomain{}, err
-	}
-
-	return user, tx.Commit()
+	return user, nil
 }
 
-func (repo *AuthRepositorySQLite) Logout(ctx context.Context, userId uint32) (bool, error) {
-	tx, err := repo.DB.Begin()
+func (repo *AuthRepositorySQLite) GetUserById(userId int32) (domain.UserDomain, error) {
+	query := `
+	SELECT id, username, email, phone, role, is_login, created_at, updated_at 
+	FROM users WHERE id = ?`
+
+	var user domain.UserDomain
+	row := repo.DB.QueryRow(query, userId)
+	err := row.Scan(
+		&user.Id, &user.Username, &user.Email, &user.Phone, &user.Role, &user.IsLogin, &user.CreatedAt, &user.UpdatedAt,
+	)
 	helper.PanicIfError(err)
 
+	return user, nil
+}
+
+func (repo *AuthRepositorySQLite) Logout(userId int32) (bool, error) {
 	query := `UPDATE users SET is_login = false WHERE id = ?`
 
-	stmt, err := tx.PrepareContext(ctx, query)
+	_, err := repo.DB.Exec(query, userId)
 	helper.PanicIfError(err)
-	defer stmt.Close()
 
-	_, err = stmt.ExecContext(ctx, userId)
-	if err != nil {
-		tx.Rollback()
-		return false, err
-	}
-
-	return true, tx.Commit()
+	return true, nil
 }

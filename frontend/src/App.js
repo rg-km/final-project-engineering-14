@@ -8,6 +8,7 @@ import {
 	Level,
 	Language,
 	HomePage,
+	Dashboard,
 } from "./Pages";
 import PrivateRoute from "./Routes/privateRoutes";
 
@@ -21,6 +22,7 @@ export const App = () => {
 			<Route path="/register" element={<Register />}></Route>
 
 			<Route path="" element={<PrivateRoute />}>
+				<Route path="/Dashboard" element={<Dashboard />}></Route>
 				<Route path="/HomePage" element={<HomePage />}></Route>
 				<Route path="/Level" element={<Level />}></Route>
 				<Route path="/Language" element={<Language />}></Route>
