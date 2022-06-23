@@ -1,8 +1,27 @@
 #create-question {
-	background-color: #006a7a;
+  text-align: center;
+  background-color: #006a7a;
+  height: 800px;
 
-	.container-outside {
-		background-color: red;
-		margin-top: 100px;
-	}
+  .container-outside {
+    padding-top: 20px;
+    color: white;
+
+    .card-title {
+      font-size: 20px;
+    }
+    .form-input {
+      width: 700px;
+    }
+
+    .form-area {
+      width: 700px;
+      height: 300px;
+    }
+
+    .button {
+      width: 700px;
+      height: 50px;
+    }
+  }
 }

@@ -1,88 +1,117 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-
 #dashboard-pages {
   background-color: #006a7a;
-  font-family: "Poppins, sans-serif";
   height: 100vh;
 
-  .profile-name {
-    h1 {
-      text-align: center;
-      color: white;
-      font-weight: 700;
-      font-size: 40px;
-      line-height: 75px;
+  h1 {
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 75px;
+  }
+
+  .card {
+    width: 150px;
+    height: 50px;
+  }
+
+  .button-create {
+    width: 150px;
+    height: 50px;
+    float: right;
+  }
+
+  .table {
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+    border: 0px;
+
+    .table-body,
+    tr,
+    td {
+      border: 0px;
     }
   }
-  .card-main {
-    margin-top: 80px;
-    .card-body {
-      .button-1 {
-        background: #006a7a;
-        margin: 0px 350px 0px 0px;
-        color: white;
-      }
-      button {
-        margin: 0px 0px 0px 350px;
-        flex-direction: row;
-        width: 250px;
-        height: 50px;
-        background: #ffcc48;
-        box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
-        border-radius: 12px;
-        border: 0px;
-        color: black;
-        font-weight: bold;
-        font-size: 24px;
-      }
-      .card-question {
-        text-align: center;
-      }
-      .question-text {
-        text-align: justify;
-        font-size: 18px;
-        font-weight: 400px;
-      }
-      .button-update {
-        margin: 0px 0px 0px 65px;
-        button {
-          width: 120px;
-          height: 50px;
-          font-weight: 400px;
-          font-size: 18px;
-          color: black;
-        }
-      }
-      .button-update2 {
-        margin: 0px 0px 0px 65px;
-        button {
-          margin-top: 40px;
-          width: 120px;
-          height: 50px;
-          font-weight: 400px;
-          font-size: 18px;
-          color: black;
-        }
-      }
-      .button-delete {
-        button {
-          width: 120px;
-          height: 50px;
-          font-weight: 400px;
-          font-size: 18px;
-          color: black;
-        }
-      }
-      .button-delete2 {
-        button {
-          margin-top: 40px;
-          width: 120px;
-          height: 50px;
-          font-weight: 400px;
-          font-size: 18px;
-          color: black;
-        }
-      }
-    }
-  }
+
+  // .profile-name {
+  //   h1 {
+  //     text-align: center;
+  //     color: white;
+  //     font-weight: 700;
+  //     font-size: 40px;
+  //     line-height: 75px;
+  //   }
+  // }
+  // .card-main {
+  //   margin-top: 80px;
+  //   .card-body {
+  //     .button-1 {
+  //       background: #006a7a;
+  //       margin: 0px 350px 0px 0px;
+  //       color: white;
+  //     }
+  //     button {
+  //       margin: 0px 0px 0px 350px;
+  //       flex-direction: row;
+  //       width: 250px;
+  //       height: 50px;
+  //       background: #ffcc48;
+  //       box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
+  //       border-radius: 12px;
+  //       border: 0px;
+  //       color: black;
+  //       font-weight: bold;
+  //       font-size: 24px;
+  //     }
+  //     .card-question {
+  //       text-align: center;
+  //     }
+  //     .question-text {
+  //       text-align: justify;
+  //       font-size: 18px;
+  //       font-weight: 400px;
+  //     }
+  //     .button-update {
+  //       margin: 0px 0px 0px 65px;
+  //       button {
+  //         width: 120px;
+  //         height: 50px;
+  //         font-weight: 400px;
+  //         font-size: 18px;
+  //         color: black;
+  //       }
+  //     }
+  //     .button-update2 {
+  //       margin: 0px 0px 0px 65px;
+  //       button {
+  //         margin-top: 40px;
+  //         width: 120px;
+  //         height: 50px;
+  //         font-weight: 400px;
+  //         font-size: 18px;
+  //         color: black;
+  //       }
+  //     }
+  //     .button-delete {
+  //       button {
+  //         width: 120px;
+  //         height: 50px;
+  //         font-weight: 400px;
+  //         font-size: 18px;
+  //         color: black;
+  //       }
+  //     }
+  //     .button-delete2 {
+  //       button {
+  //         margin-top: 40px;
+  //         width: 120px;
+  //         height: 50px;
+  //         font-weight: 400px;
+  //         font-size: 18px;
+  //         color: black;
+  //       }
+  //     }
+  //   }
+  // }
 }
