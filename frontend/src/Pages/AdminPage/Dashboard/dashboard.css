@@ -1,9 +1,10 @@
-button {
+.update,
+.delete {
   background-color: #ffcc48;
   width: 100px;
   height: 50px;
   border: 0px;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 #dashboard-pages {

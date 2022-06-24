@@ -32,8 +32,8 @@ export default function Dashboard() {
           <tr>
             <td>${values.programming_languange}</td>
             <td>${values.question}</td>
-            <td><Button>Update</Button></td>
-            <td><Button>Delete</Button></td>
+            <td><Button class="update">Update</Button></td>
+            <td><Button class="delete">Delete</Button></td>
           </tr>
           `;
 				});
@@ -45,6 +45,69 @@ export default function Dashboard() {
 	};
 
 	getData();
+
+	const getDataAll = () => {
+		let auth = localStorage.getItem("token");
+		fetch("https://3090-103-169-136-72.ap.ngrok.io/admin/dashboard", {
+			method: "GET",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + auth,
+			},
+		})
+			// .then((res) => res.json());
+			.then((data) => {
+				return data.json();
+			})
+			.then((objectData) => {
+				console.log(objectData.data);
+				// 	let tableData = "";
+				// 	objectData.data.map((values) => {
+				// 		tableData += `
+				//     <tr>
+				//       <td>${values.programming_languange}</td>
+				//       <td>${values.question}</td>
+				//       <td><Button class="update">Update</Button></td>
+				//       <td><Button class="delete">Delete</Button></td>
+				//     </tr>
+				//     `;
+				// 	});
+				// 	document.getElementById("table-body").innerHTML = tableData;
+				// })
+				// .catch((err) => {
+				// 	console.log(err);
+			});
+	};
+
+	getDataAll();
+
+	const delete_data = () => {
+		const deleteData = () => {
+			let auth = localStorage.getItem("token");
+			fetch(
+				"https://3090-103-169-136-72.ap.ngrok.io/admin/questions/delete/{questionId}",
+				{
+					method: "Delete",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + auth,
+					},
+				}
+			)
+				// .then((res) => res.json());
+				// .then((res) => {
+				//   if(res.ok) => {
+				//               console.log("Delete Success");
+				//           }
+				// })
+				.catch((err) => {
+					console.log(err);
+				});
+		};
+		return deleteData();
+	};
 
 	return (
 		<section id="dashboard-pages">
