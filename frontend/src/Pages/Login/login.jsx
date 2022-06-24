@@ -2,6 +2,7 @@
 import React, { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
+import API from "../../Api/Api";
 
 import "./style.css";
 import banner from "../../Assets/Images/Login-Images.png";
@@ -25,9 +26,10 @@ export const Login = () => {
 
 		const enteredEmail = emailInputRef.current.value;
 		const enteredPassword = passwordInputRef.current.value;
+		let auth = localStorage.getItem("token");
 
 		let url;
-		url = "https://33d9-120-188-66-111.ap.ngrok.io/auth/sign-in";
+		url = `${API.API_URL}/auth/sign-in`;
 		fetch(url, {
 			method: "POST",
 			body: JSON.stringify({
@@ -38,6 +40,7 @@ export const Login = () => {
 			headers: {
 				Accept: "/",
 				"Content-Type": "application/json",
+				Authorization: "Bearer " + auth,
 			},
 		})
 			.then((res) => {

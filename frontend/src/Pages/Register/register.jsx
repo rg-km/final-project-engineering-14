@@ -4,6 +4,7 @@ import banner from "../../Assets/Images/Register-Images.png";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API from "../../Api/Api";
 // import { Link } from "react-router-dom";
 
 export default function Register() {
@@ -18,7 +19,7 @@ export default function Register() {
 		e.preventDefault();
 		try {
 			let res = await axios.post(
-				"https://33d9-120-188-66-111.ap.ngrok.io/auth/sign-up",
+				`${API.API_URL}/auth/sign-up`,
 				{
 					username: username,
 					email: email,
