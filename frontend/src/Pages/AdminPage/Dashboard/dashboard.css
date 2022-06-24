@@ -9,12 +9,14 @@
 
 #dashboard-pages {
   background-color: #006a7a;
-  height: 100vh;
+  height: auto;
+  padding-bottom: 500px;
 }
 
 #dashboard-pages h1 {
   text-align: center;
   color: white;
+  background-color: #006a7a;
   font-weight: 700;
   font-size: 40px;
   line-height: 75px;
