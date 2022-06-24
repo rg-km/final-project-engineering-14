@@ -1,99 +1,12 @@
-<<<<<<< HEAD
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-#dashboard-pages {
-  background-color: #006a7a;
-  font-family: "Poppins, sans-serif";
-  height: 100vh;
-}
-
-#dashboard-pages .profile-name h1 {
-  text-align: center;
-  color: white;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 75px;
-}
-
-#dashboard-pages .card-main {
-  margin-top: 80px;
-}
-
-#dashboard-pages .card-main .card-body .button-1 {
-  background: #006a7a;
-  margin: 0px 350px 0px 0px;
-  color: white;
-}
-
-#dashboard-pages .card-main .card-body button {
-  margin: 0px 0px 0px 350px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  width: 250px;
+.update,
+.delete {
+  background-color: #ffcc48;
+  width: 100px;
   height: 50px;
-  background: #ffcc48;
-  -webkit-box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
-          box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
-  border-radius: 12px;
   border: 0px;
-  color: black;
-  font-weight: bold;
-  font-size: 24px;
+  border-radius: 10px;
 }
 
-#dashboard-pages .card-main .card-body .card-question {
-  text-align: center;
-}
-
-#dashboard-pages .card-main .card-body .question-text {
-  text-align: justify;
-  font-size: 18px;
-  font-weight: 400px;
-}
-
-#dashboard-pages .card-main .card-body .button-update {
-  margin: 0px 0px 0px 65px;
-}
-
-#dashboard-pages .card-main .card-body .button-update button {
-  width: 120px;
-  height: 50px;
-  font-weight: 400px;
-  font-size: 18px;
-  color: black;
-}
-
-#dashboard-pages .card-main .card-body .button-update2 {
-  margin: 0px 0px 0px 65px;
-}
-
-#dashboard-pages .card-main .card-body .button-update2 button {
-  margin-top: 40px;
-  width: 120px;
-  height: 50px;
-  font-weight: 400px;
-  font-size: 18px;
-  color: black;
-}
-
-#dashboard-pages .card-main .card-body .button-delete button {
-  width: 120px;
-  height: 50px;
-  font-weight: 400px;
-  font-size: 18px;
-  color: black;
-}
-
-#dashboard-pages .card-main .card-body .button-delete2 button {
-  margin-top: 40px;
-  width: 120px;
-  height: 50px;
-  font-weight: 400px;
-  font-size: 18px;
-  color: black;
-}
-=======
 #dashboard-pages {
   background-color: #006a7a;
   height: 100vh;
@@ -121,7 +34,7 @@
 #dashboard-pages .table {
   text-align: center;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 10px;
   border: 0px;
 }
 
@@ -130,5 +43,4 @@
 #dashboard-pages .table td {
   border: 0px;
 }
->>>>>>> 60e79c5a4a1ca2f7c740c9df40c294609c2df025
 /*# sourceMappingURL=dashboard.css.map */

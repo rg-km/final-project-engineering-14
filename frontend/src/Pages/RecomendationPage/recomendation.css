@@ -1,0 +1,18 @@
+#recomendation-page {
+  background-color: #006a7a;
+  height: 1000px;
+}
+
+#recomendation-page .title {
+  color: white;
+}
+
+#recomendation-page .container-luar {
+  padding-top: 20px;
+  color: black;
+  background-color: white;
+  height: 700px;
+  border-radius: 20px;
+  margin-bottom: 50px;
+}
+/*# sourceMappingURL=recomendation.css.map */

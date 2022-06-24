@@ -1,38 +1,27 @@
-<<<<<<< HEAD
 #create-question {
+	text-align: center;
 	background-color: #006a7a;
+	height: 850px;
 
 	.container-outside {
-		background-color: red;
-		margin-top: 100px;
+		padding-top: 20px;
+		color: white;
+
+		.card-title {
+			font-size: 20px;
+		}
+		.form-input {
+			width: 700px;
+		}
+
+		.form-area {
+			width: 700px;
+			height: 300px;
+		}
+
+		.button {
+			width: 700px;
+			height: 50px;
+		}
 	}
 }
-=======
-#create-question {
-  text-align: center;
-  background-color: #006a7a;
-  height: 800px;
-
-  .container-outside {
-    padding-top: 20px;
-    color: white;
-
-    .card-title {
-      font-size: 20px;
-    }
-    .form-input {
-      width: 700px;
-    }
-
-    .form-area {
-      width: 700px;
-      height: 300px;
-    }
-
-    .button {
-      width: 700px;
-      height: 50px;
-    }
-  }
-}
->>>>>>> 60e79c5a4a1ca2f7c740c9df40c294609c2df025

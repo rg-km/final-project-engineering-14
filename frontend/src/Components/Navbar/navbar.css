@@ -1,16 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 #navbar-home {
   background-color: #006a7a;
-  font-family: "Poppins, sans-serif";
 }
 
 #navbar-home .nav-content {
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
-#navbar-home .card-avatar {
-  width: 50px;
+#navbar-home .button-logout {
+  width: 120px;
   height: 50px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
 }
 /*# sourceMappingURL=navbar.css.map */

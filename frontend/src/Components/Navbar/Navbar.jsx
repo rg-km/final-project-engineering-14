@@ -38,37 +38,27 @@ function HomeNavbar() {
 						<Navbar.Toggle aria-controls="basic-navbar-nav" />
 						<Navbar.Collapse id="basic-navbar-nav" className="nav-content mx-3">
 							<Nav className="me-auto">
-								<Nav.Link href="#home" className="text-light">
+								<Nav.Link href="" className="text-light pe-3">
 									Home
 								</Nav.Link>
-								<Nav.Link href="#link" className="text-light">
-									Journey
-								</Nav.Link>
-								<Nav.Link href="#link" className="text-light">
+								<Nav.Link href="#link" className="text-light pe-4">
 									Learning Path
 								</Nav.Link>
+								<Nav className="text-light">
+									<Button
+										className="button-logout"
+										variant="warning"
+										onClick={logoutHandler}
+									>
+										Logout
+									</Button>
+								</Nav>
 							</Nav>
-							<Nav className="text-light">
-								<Button variant="warning" onClick={logoutHandler}>
-									Logout
-								</Button>
-							</Nav>
-							{/* <div className="card-profile">
-								<Card style={{ width: "200px", height: "60px" }}>
-									<Row>
-										<Col>
-											<Image
-												className="card-avatar"
-												src={Avatar}
-												roundedCircle
-											/>
-										</Col>
-										<Col className="col-8 my-auto">
-											<h5>Rahman Budi</h5>
-										</Col>
-									</Row>
-								</Card>
-							</div> */}
+							{/* <Card style={{ width: "200px", height: "60px" }}>
+								<Card.Img src={Avatar} className="card-avatar" /> */}
+
+							{/* <Card.Text>Your Name</Card.Text> */}
+							{/* </Card> */}
 						</Navbar.Collapse>
 					</Row>
 				</Container>

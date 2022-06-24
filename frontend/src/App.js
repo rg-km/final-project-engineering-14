@@ -10,13 +10,13 @@ import {
 	HomePage,
 	Dashboard,
 	CreateQuestion,
+	Recomendation,
 } from "./Pages";
 import PrivateRoute from "./Routes/privateRoutes";
 
 export const App = () => {
 	return (
 		<Routes>
-			<Route path="CreateQuestion" element={<CreateQuestion />} />
 			<Route path="/" element={<Landing />}>
 				{" "}
 			</Route>
@@ -24,12 +24,13 @@ export const App = () => {
 			<Route path="/register" element={<Register />}></Route>
 
 			<Route path="" element={<PrivateRoute />}>
-				<Route path="/Dashboard" element={<Dashboard />}></Route>
 				<Route path="/Question" element={<Question />}></Route>
 				<Route path="/HomePage" element={<HomePage />}></Route>
 				<Route path="/Level" element={<Level />}></Route>
 				<Route path="/Language" element={<Language />}></Route>
-				<Route path="/Question" element={<Question />}></Route>
+				<Route path="/Recomendation" element={<Recomendation />}></Route>
+				<Route path="/Dashboard" element={<Dashboard />}></Route>
+				<Route path="/CreateQuestion" element={<CreateQuestion />}></Route>
 			</Route>
 
 			<Route path="*" element={<Navigate to="/" />}></Route>
