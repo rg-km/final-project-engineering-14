@@ -18,7 +18,7 @@ export default function CreateQuestion() {
 		event.preventDefault();
 		try {
 			let res = await axios.post(
-				"https://3090-103-169-136-72.ap.ngrok.io/admin/questions/create",
+				"https://db77-120-188-37-170.ap.ngrok.io/admin/questions/create",
 				{
 					programming_languange: programming_languange,
 					question: question,

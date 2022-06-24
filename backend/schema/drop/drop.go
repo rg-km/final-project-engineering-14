@@ -13,7 +13,6 @@ func DropAllTable(db *sql.DB) {
 		DROP TABLE IF EXISTS programming_languanges;
 		DROP TABLE IF EXISTS questions;
 		DROP TABLE IF EXISTS answers;
-		DROP TABLE IF EXISTS answers_attempts;
 	`
 	_, err := db.Exec(query)
 	helper.PanicIfErrorWithMessage("Error when dropping table:", err)

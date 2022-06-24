@@ -1,27 +1,27 @@
 #create-question {
-  text-align: center;
-  background-color: #006a7a;
-  height: 800px;
+	text-align: center;
+	background-color: #006a7a;
+	height: 850px;
 
-  .container-outside {
-    padding-top: 20px;
-    color: white;
+	.container-outside {
+		padding-top: 20px;
+		color: white;
 
-    .card-title {
-      font-size: 20px;
-    }
-    .form-input {
-      width: 700px;
-    }
+		.card-title {
+			font-size: 20px;
+		}
+		.form-input {
+			width: 700px;
+		}
 
-    .form-area {
-      width: 700px;
-      height: 300px;
-    }
+		.form-area {
+			width: 700px;
+			height: 300px;
+		}
 
-    .button {
-      width: 700px;
-      height: 50px;
-    }
-  }
+		.button {
+			width: 700px;
+			height: 50px;
+		}
+	}
 }
