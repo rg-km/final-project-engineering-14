@@ -1,1 +1,29 @@
-/* No CSS *//*# sourceMappingURL=createQuestion.css.map */
+#create-question {
+  text-align: center;
+  background-color: #006a7a;
+  height: 850px;
+}
+
+#create-question .container-outside {
+  padding-top: 20px;
+  color: white;
+}
+
+#create-question .container-outside .card-title {
+  font-size: 20px;
+}
+
+#create-question .container-outside .form-input {
+  width: 700px;
+}
+
+#create-question .container-outside .form-area {
+  width: 700px;
+  height: 300px;
+}
+
+#create-question .container-outside .button {
+  width: 700px;
+  height: 50px;
+}
+/*# sourceMappingURL=createQuestion.css.map */
