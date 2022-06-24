@@ -1,5 +1,5 @@
 const API = {
-  API_URL: "https://db77-120-188-37-170.ap.ngrok.io",
+  API_URL: "https://33d9-120-188-66-111.ap.ngrok.io",
 };
 
 export default API;
