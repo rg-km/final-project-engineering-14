@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./question.css";
 
 const question = () => {
@@ -15,9 +16,11 @@ const question = () => {
 								</h5>
 							</div>
 							<div className="col-6">
-								<button type="button" className="btn btn-warning kanan mr-3">
-									Next
-								</button>
+								<Link to="/Level">
+									<button type="button" className="btn btn-warning kanan mr-3">
+										Next
+									</button>
+								</Link>
 							</div>
 						</div>
 
