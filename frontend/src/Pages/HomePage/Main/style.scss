@@ -1,56 +1,55 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-
 :root {
-  --main-color: #006a7a;
-  --button-color: #ffcc48;
-
-  --main-font: "Poppins", sans-serif;
+	--main-color: #006a7a;
+	--button-color: #ffcc48;
 }
 
 #main-pages {
-  margin: 0px 0px 0px 0px;
-  background-color: #006a7a;
-  height: 85vh;
-  overflow: hidden;
-  .main-left {
-    left: 2px;
-    top: -1px;
+	margin: 0px 0px 0px 0px;
+	background-color: #006a7a;
+	height: 85vh;
+	overflow: hidden;
+	.main-left {
+		left: 2px;
+		top: -1px;
 
-    .main-logo {
-      width: 60%;
-      height: 60%;
-      display: flex;
-      margin: 170px auto 0 80px;
-    }
-  }
-  .main-right {
-    font-family: var(--main-font);
-    margin: 0px 0px 0px 80px;
-    text-align: center;
+		.main-logo {
+			width: 60%;
+			height: 60%;
+			display: flex;
+			margin: 170px auto 0 80px;
+		}
+	}
+	.main-right {
+		font-family: var(--main-font);
+		margin: 0px 0px 0px 80px;
+		text-align: center;
 
-    .main-text {
-      margin-top: 100px;
-      h1 {
-        font-size: 50px;
-        font-weight: bold;
-      }
+		.main-text {
+			margin-top: 100px;
+			h1 {
+				font-size: 50px;
+				font-weight: bold;
+			}
 
-      p {
-        font-size: 23px;
-      }
-    }
+			p {
+				font-size: 23px;
+			}
+		}
 
-    .border-radius-10 {
-      border-radius: 10px;
-      border: 0px;
-      margin: 150px 0px 0px 0px;
-    }
-  }
+		.border-radius-10 {
+			border-radius: 10px;
+			border: 0px;
+			margin: 150px 0px 0px 0px;
+		}
+	}
 
-  .btn-color-theme {
-    color: black !important;
-    background-color: #ffcc48;
-    border: 0px;
-    font-weight: bold;
-  }
+	.btn-color-theme {
+		color: black !important;
+		background-color: #ffcc48;
+		border: 0px;
+		border-radius: 10px;
+		font-weight: bold;
+		width: 160px;
+		height: 70px;
+	}
 }

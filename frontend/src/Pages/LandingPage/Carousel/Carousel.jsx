@@ -11,11 +11,10 @@ const Carousel = () => {
 					<img src={Background} className="d-block w-100 gmbr" alt="..." />
 					<div className="carousel-caption d-none d-md-block">
 						<h2>
-							Build Your Skills With{" "}
+							Build Your Skills With
 							<span>
-								{" "}
 								Experts <br /> Any Time Anywhere
-							</span>{" "}
+							</span>
 						</h2>
 						<p className="mt-3 mb-5">
 							Free online courses from the world’s Leading experts. join 10+

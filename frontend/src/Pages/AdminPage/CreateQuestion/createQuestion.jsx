@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import API from "../../../Api/Api";
 
 import "./createQuestion.css";
 import Navbar from "../../../Components/Navbar/Navbar";
@@ -18,7 +19,7 @@ export default function CreateQuestion() {
 		event.preventDefault();
 		try {
 			let res = await axios.post(
-				"https://33d9-120-188-66-111.ap.ngrok.io/admin/questions/create",
+				`${API.API_URL}/admin/questions/create`,
 				{
 					programming_languange: programming_languange,
 					question: question,
