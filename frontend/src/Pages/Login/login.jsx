@@ -78,7 +78,7 @@ export const Login = () => {
 					<h2 className="mb-5">Login to your Account</h2>
 					<form onSubmit={handleSubmit}>
 						<div className="mb-3">
-							<label for="emailInput" className="form-label">
+							<label htmlFor="emailInput" className="form-label">
 								Email
 							</label>
 							<input
@@ -89,7 +89,7 @@ export const Login = () => {
 							/>
 						</div>
 						<div className="mb-3">
-							<label for="exampleInputPassword1" className="form-label">
+							<label htmlFor="exampleInputPassword1" className="form-label">
 								Password
 							</label>
 							<input
@@ -102,6 +102,12 @@ export const Login = () => {
 						<button type="submit" className="btn mt-3">
 							Login
 						</button>
+						<p className="make-account mt-4">
+							Doesn't have an account ?&nbsp;
+							<a href="/register" className="text-decoration-none">
+								SignUp
+							</a>
+						</p>
 					</form>
 				</div>
 			</div>

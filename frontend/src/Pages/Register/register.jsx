@@ -118,7 +118,7 @@ export default function Register() {
 							{/* </Link> */}
 						</div>
 						<p className="have-account mt-4">
-							Already have an account?{" "}
+							Already have an account ?{" "}
 							<a href="/login" className="text-decoration-none">
 								Login
 							</a>

@@ -31,41 +31,43 @@ const question = () => {
 								consectetur nisi nisl eget
 							</p>
 							<form action="/action_page.php">
-								<div class="form-check">
+								<div className="form-check">
 									<input
 										type="radio"
-										class="form-check-input"
+										className="form-check-input"
 										id="radio1"
 										name="optradio"
 										value="option1"
 									/>
-									<label class="form-check-label" for="radio1">
+									<label className="form-check-label" htmlFor="radio1">
 										Option 1
 									</label>
 								</div>
-								<div class="form-check">
+								<div className="form-check">
 									<input
 										type="radio"
-										class="form-check-input"
+										className="form-check-input"
 										id="radio2"
 										name="optradio"
 										value="option2"
 									/>
-									<label class="form-check-label" for="radio2">
+									<label className="form-check-label" htmlFor="radio2">
 										Option 2
 									</label>
 								</div>
-								<div class="form-check">
+								<div className="form-check">
 									<input
 										type="radio"
-										class="form-check-input"
+										className="form-check-input"
 										id="radio3"
 										name="optradio"
 										value="option3"
 									/>
-									<label class="form-check-label">Option 3</label>
+									<label className="form-check-label" htmlFor="radio3">
+										Option 3
+									</label>
 								</div>
-								<button type="submit" class="btn btn-success mt-3">
+								<button type="submit" className="btn btn-success mt-3">
 									Check
 								</button>
 							</form>

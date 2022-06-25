@@ -1,9 +1,18 @@
 #learning-path {
-  height: 100%;
-  .path {
-    text-align: center;
-  }
-  .learning-path {
-    height: 60vh;
-  }
+	height: 100%;
+	padding-top: 50px;
+	padding-bottom: 70px;
+	.path {
+		text-align: center;
+		h2 {
+			margin-bottom: 50px;
+		}
+	}
+	.learning-path {
+		height: 60vh;
+
+		img {
+			border-image: 5px solid black;
+		}
+	}
 }

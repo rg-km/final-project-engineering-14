@@ -1,12 +1,23 @@
 #learning-path {
   height: 100%;
+  padding-top: 50px;
+  padding-bottom: 70px;
 }
 
 #learning-path .path {
   text-align: center;
 }
 
+#learning-path .path h2 {
+  margin-bottom: 50px;
+}
+
 #learning-path .learning-path {
   height: 60vh;
+}
+
+#learning-path .learning-path img {
+  -o-border-image: 5px solid black;
+     border-image: 5px solid black;
 }
 /*# sourceMappingURL=style.css.map */

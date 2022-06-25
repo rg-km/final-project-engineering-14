@@ -1,8 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 :root {
   --main-color: #006a7a;
   --button-color: #ffcc48;
-  --main-font: "Poppins", sans-serif;
 }
 
 #main-pages {
@@ -55,6 +53,9 @@
   color: black !important;
   background-color: #ffcc48;
   border: 0px;
+  border-radius: 10px;
   font-weight: bold;
+  width: 160px;
+  height: 70px;
 }
 /*# sourceMappingURL=style.css.map */
