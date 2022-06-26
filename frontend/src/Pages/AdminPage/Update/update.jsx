@@ -1,84 +1,57 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import React, { Component } from "react";
 import API from "../../../Api/Api";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-import Navbar from "../../../Components/Navbar/Navbar";
 import { Container, Form, Button } from "react-bootstrap";
 
-export default function Update(props) {
-	const [programming_languange, setProgramming_languange] = useState("");
-	const [question, setQuestion] = useState("");
-	const navigate = useNavigate();
-	const [posts, setPosts] = useState([]);
-	const [check, setCheck] = useState(false);
-	const apiQuestions = `${API.API_URL}/admin/questions`;
+export class Update extends Component {
+	// handleUpdate() {
+	// 	console.log("update");
+	// }
 
-	let auth = localStorage.getItem("token");
-
-	useEffect(() => {
-		getPosts();
-	}, []);
-
-	const getPosts = async () => {
-		const id = props.match.params.id;
-		const { data: res } = await axios.get(apiQuestions + id, {
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + auth,
-			},
-		});
-		console.log(res.data);
-		// console.log(posts.data.length);
-		// if (!res.data === "null") {
-		setPosts(res.data);
-		setCheck(true);
-		// } else {
-		// 	setPosts(res.data);
-		// 	setCheck(false);
-		// }
-	};
-	const handleCreate = async (event) => {
-		event.preventDefault();
-		try {
-			let res = await axios.post(
-				"https://8b7d-120-188-34-21.ap.ngrok.io/admin/questions/create",
-				{
-					programming_languange: programming_languange,
-					question: question,
-					returnSecureToken: true,
-				},
-				{
-					headers: {
-						Accept: "/",
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + localStorage.getItem("token"),
-					},
-				}
-			);
-			// console.log(res);
-			if (res.status === 200) {
-				navigate("/Dashboard");
-			}
-		} catch (error) {
-			// alert(
-			// 	"Username / Email Sudah terdaftar, Silahkan Periksa Data Anda Kembali!"
-			// );
-			console.log(error);
-		}
+	state = {
+		id: "",
+		programming_languange: "",
+		questions: "",
 	};
 
-	return (
-		<section id="dashboard-pages">
-			<Navbar />
-			<div className="profile-name pt-3">
-				<h1 className="mb-5">Welcome, Admin!</h1>
-			</div>
-			<div>
+	// componentDidMount = async () => {
+	// 	const id = this.props.match.params.id;
+	// 	const auth = localStorage.getItem("token");
+	// 	const res = await axios.get(`${API.API_URL}/admin/questions/` + id, {
+	// 		method: "GET",
+	// 		headers: {
+	// 			Accept: "application/json",
+	// 			"Content-Type": "application/json",
+	// 			Authorization: "Bearer " + auth,
+	// 		},
+	// 	});
+	// 	this.setState({
+	// 		id: res.data.id,
+	// 		programming_languange: res.data.programming_languange,
+	// 		questions: res.data.questions,
+	// 	});
+	// };
+
+	// handlerChange = (e) => {
+	// 	this.setState({ [e.target.name]: e.target.value });
+	// };
+
+	handleUpdate = async (e) => {
+		const auth = localStorage.getItem("token");
+		const id = this.props.match.params.id;
+		e.preventDefault();
+		await axios.put(`${API.API_URL}/admin/questions/update` + id, this.state);
+	};
+	render() {
+		const { programming_languange, questions } = this.state;
+
+		return (
+			<section id="create-question">
 				<Container className="container-outside">
-					<Form onSubmit={handleCreate}>
-						<h1 className="mb-5">Create Question</h1>
+					<Form onSubmit={this.handleUpdate}>
+						<h1 className="mb-5">Update Question</h1>
 						<Form.Group className="mb-3 mx-auto" controlId="formBasicEmail">
 							<Form.Label className="card-title">
 								Programming Language
@@ -86,9 +59,8 @@ export default function Update(props) {
 							<Form.Control
 								type="text"
 								className="mx-auto form-input"
-								onChange={(event) =>
-									setProgramming_languange(event.target.value)
-								}
+								// value={programming_languange}
+								onChange={this.handlerChange}
 							/>
 						</Form.Group>
 
@@ -97,28 +69,31 @@ export default function Update(props) {
 							<Form.Control
 								as="textarea"
 								className="mx-auto form-area"
-								onChange={(event) => setQuestion(event.target.value)}
+								// value={questions}
+								onChange={this.handlerChange}
 							/>
 						</Form.Group>
 						<Button variant="warning button" className="mt-3" type="submit">
-							Submit
+							Update
 						</Button>
 					</Form>
 				</Container>
-			</div>
-		</section>
-	);
+			</section>
+		);
+	}
 }
+
+export default Update;
 
 // import React, { useState } from "react";
 // import axios from "axios";
 // import "./update.css";
+// import API from "../../../Api/Api";
 
 // import { Container, Form, Button } from "react-bootstrap";
 
-// export default function Update() {
-// 	const apiQuestions =
-// 		"https://33d9-120-188-66-111.ap.ngrok.io/admin/questions/update/";
+// export default function Update(id) {
+// 	const apiQuestions = `${API.API_URL}/admin/questions/update/id`;
 // 	let auth = localStorage.getItem("token");
 
 // 	const [questions, setQuestions] = useState([]);
@@ -179,7 +154,7 @@ export default function Update(props) {
 // 		<section id="create-question">
 // 			<Container className="container-outside">
 // 				<Form onSubmit={handleSubmit}>
-// 					<h1 className="mb-5">Create Question</h1>
+// 					<h1 className="mb-5">Update Question</h1>
 // 					<Form.Group className="mb-3 mx-auto" controlId="formBasicEmail">
 // 						<Form.Label className="card-title">Programming Language</Form.Label>
 // 						<Form.Control
@@ -200,7 +175,7 @@ export default function Update(props) {
 // 						/>
 // 					</Form.Group>
 // 					<Button variant="warning button" className="mt-3" type="submit">
-// 						Submit
+// 						Update
 // 					</Button>
 // 				</Form>
 // 			</Container>

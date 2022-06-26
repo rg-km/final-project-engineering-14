@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import AuthContext from "../../store/auth-context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./navbar.css";
 import Logo from "../../../src/Assets/Images/Logo.png";
@@ -13,11 +13,13 @@ import Navbar from "react-bootstrap/Navbar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { NavItem } from "react-bootstrap";
 // import Card from "react-bootstrap/Card";
 // import Image from "react-bootstrap/Image";
 
 function HomeNavbar() {
 	const authCtx = useContext(AuthContext);
+	const role = localStorage.getItem("role");
 	const navigate = useNavigate();
 
 	const logoutHandler = () => {
@@ -38,12 +40,16 @@ function HomeNavbar() {
 						<Navbar.Toggle aria-controls="basic-navbar-nav" />
 						<Navbar.Collapse id="basic-navbar-nav" className="nav-content mx-3">
 							<Nav className="me-auto">
-								<Nav.Link href="" className="text-light pe-3">
-									Home
-								</Nav.Link>
-								<Nav.Link href="#link" className="text-light pe-4">
-									Learning Path
-								</Nav.Link>
+								{authCtx.role === "guest" && (
+									<a href="#main-pages">
+										<Nav className="text-light pe-3 mt-2">Home</Nav>
+									</a>
+								)}
+								{authCtx.role === "guest" && (
+									<a href="#learning-path">
+										<Nav className="text-light pe-4 mt-2">Learning Path</Nav>
+									</a>
+								)}
 								<Nav className="text-light">
 									<Button
 										className="button-logout"

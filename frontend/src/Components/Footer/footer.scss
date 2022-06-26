@@ -1,24 +1,23 @@
 #footer {
-  background-color: #006a7a;
-  font-family: "Poppins, sans-serif";
+	background-color: #006a7a;
 
-  .main-content {
-    height: auto;
-  }
+	.main-content {
+		height: auto;
+	}
 
-  .double-logo {
-    display: flex;
-    justify-content: flex-start;
-  }
+	.double-logo {
+		display: flex;
+		justify-content: flex-start;
+	}
 
-  .pages-link {
-    text-decoration: none;
-    color: white;
-  }
+	.pages-link {
+		text-decoration: none;
+		color: white;
+	}
 
-  .copyright {
-    h5 {
-      font-size: 16px;
-    }
-  }
+	.copyright {
+		h5 {
+			font-size: 16px;
+		}
+	}
 }

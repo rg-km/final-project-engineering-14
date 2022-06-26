@@ -4,6 +4,10 @@
 	.nav-content {
 		font-size: 20px;
 		font-weight: 700;
+		a:link {
+			color: inherit;
+			text-decoration: none;
+		}
 	}
 
 	.button-logout {

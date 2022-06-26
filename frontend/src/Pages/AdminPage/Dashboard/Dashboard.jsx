@@ -5,23 +5,16 @@ import API from "../../../Api/Api";
 
 import "./dashboard.css";
 import Navbar from "../../../Components/Navbar/Navbar";
-import { Container, Table, Card, Button, Row, Col } from "react-bootstrap";
+import { Container, Table, Button, Row, Col } from "react-bootstrap";
 
-export default function Dashboard(props) {
+export default function Dashboard() {
 	const [posts, setPosts] = useState([]);
-	const [check, setCheck] = useState(false);
-	const [edit, setEdit] = useState("");
-
 	const navigate = useNavigate();
 
 	const apiQuestions = `${API.API_URL}/admin/questions`;
 	const apiDeletes = `${API.API_URL}/admin/questions/delete/`;
 
 	let auth = localStorage.getItem("token");
-
-	useEffect(() => {
-		getPosts();
-	}, []);
 
 	const getPosts = async () => {
 		const { data: res } = await axios.get(apiQuestions, {
@@ -31,18 +24,22 @@ export default function Dashboard(props) {
 				Authorization: "Bearer " + auth,
 			},
 		});
-		console.log(res.data);
-		// console.log(posts.data.length);
-		// if (!res.data === "null") {
+		// console.log(res.data);
+		// console.log(res.data.length);
+		// if (!res.data === { null: "null" }) {
+		// setCheck(false);
 		setPosts(res.data);
-		setCheck(true);
+		// navigate("/Dashboard");
 		// } else {
-		// 	setPosts(res.data);
-		// 	setCheck(false);
+		// 	navigate("/CreateQuestion");
 		// }
 	};
 
-	console.warn(posts);
+	useEffect(() => {
+		getPosts();
+	}, []);
+
+	// console.warn(posts);
 
 	function deleteQuestion(id) {
 		fetch(apiDeletes + `${id}`, {
@@ -56,15 +53,15 @@ export default function Dashboard(props) {
 			// console.log(posts.questionQuestion);
 			.then((result) => {
 				result.json().then((res) => {
-					console.warn(res);
+					// console.warn(res);
 					getPosts();
 				});
 			});
 	}
 
-	function handleUpdate(id) {
-		console.log(id);
-		// navigate.push("/Update" + `${id}`);
+	function handleUpdate(id, props) {
+		// console.log(id);
+		navigate("/Update" + id);
 	}
 
 	return (
@@ -114,23 +111,22 @@ export default function Dashboard(props) {
 						</thead>
 						<tbody id="table-body" className="table-body">
 							{posts.map((post) => (
-								<tr key={post.id}>
+								<tr className="tr-class" key={post.id}>
 									<td className="my-auto">{post.programming_languange}</td>
 									<td>{post.question}</td>
 									<td>
-										{/* <Link to={"/Update/" + post.id}> */}
-										<Button
-											variant="warning"
-											onClick={() => handleUpdate(post.id)}
-										>
-											Update
-										</Button>
-										{/* </Link> */}
+										<Link to={"/Update/" + post.id}>
+											<Button
+												variant="warning"
+												// onClick={() => handleUpdate(post.id)}
+											>
+												Update
+											</Button>
+										</Link>
 									</td>
 									<td>
 										<Button
 											variant="danger"
-											// onClick={handleDelete}
 											onClick={() => deleteQuestion(post.id)}
 										>
 											Delete
@@ -145,3 +141,41 @@ export default function Dashboard(props) {
 		</section>
 	);
 }
+
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import { Link, useNavigate } from "react-router-dom";
+// import API from "../../../Api/Api";
+
+// import Navbar from "../../../Components/Navbar/Navbar";
+// import { Container, Table, Card, Button, Row, Col } from "react-bootstrap";
+
+// function Dashboard() {
+// 	const apiQuestions = `${API.API_URL}/admin/questions`;
+// 	const apiDeletes = `${API.API_URL}/admin/questions/delete/`;
+// 	let auth = localStorage.getItem("token");
+
+// 	const [post, setPost] = useState([]);
+
+// 	const getPost = async () => {
+// 		const response = await axios.get(apiQuestions, {
+// 			headers: {
+// 				Accept: "application/json",
+// 				"Content-Type": "application/json",
+// 				Authorization: "Bearer " + auth,
+// 			},
+// 		});
+// 		return response.data;
+// 	};
+
+// 	useEffect(() => {
+// 		const getAllPost = async () => {
+// 			const allPost = await getPost();
+// 			if (allPost) setPost(allPost);
+// 		};
+
+// 		getAllPost();
+// 	}, []);
+// }
+
+// export default Dashboard;

@@ -38,10 +38,7 @@ export default function CreateQuestion() {
 				navigate("/Dashboard");
 			}
 		} catch (error) {
-			// alert(
-			// 	"Username / Email Sudah terdaftar, Silahkan Periksa Data Anda Kembali!"
-			// );
-			console.log(error);
+			// console.log(error);
 		}
 	};
 

@@ -42,6 +42,9 @@
 		tr,
 		td {
 			border: 0px;
+			.tr-class {
+				border-bottom: 1px solid black;
+			}
 		}
 	}
 }
