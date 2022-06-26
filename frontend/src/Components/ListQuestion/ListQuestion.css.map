@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAGM,cAHQ,CACZ,KAAK,CACH,YAAY,CACV,MAAM,CAAC;EACL,KAAK,EAAE,KAAK;CACb;;AALP,AAOI,cAPU,CACZ,KAAK,CAMH,UAAU,CAAC;EACT,MAAM,EAAE,mBAAmB;CAC5B",
+    "sources": [
+        "ListQuestion.scss"
+    ],
+    "names": [],
+    "file": "ListQuestion.css"
+}

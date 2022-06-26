@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 //React BS
 import Card from "react-bootstrap/Card";
 
-export default function ListLanguage({ image, language }) {
+export default function ListLanguage({ id, image, language }) {
   return (
     <section id="list-language">
       <Card>
