@@ -1,0 +1,29 @@
+#OurTeams-page {
+  background-color: #006a7a;
+  .container {
+    padding-top: 50px;
+    height: 950px;
+
+    h1 {
+      text-align: center;
+      font-weight: 700;
+      font-size: 50px;
+
+      span {
+        color: #fbcb49;
+      }
+    }
+    .main-content {
+      padding-top: 50px;
+      .avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 20px;
+      }
+      span {
+        font-weight: 400;
+        font-size: 20px;
+      }
+    }
+  }
+}

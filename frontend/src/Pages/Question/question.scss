@@ -1,22 +1,25 @@
 #question-page {
-	background-color: #006a7a;
-	.container {
-		padding-top: 50px;
-		height: 850px;
-		h1 {
-			color: white;
-			text-align: center;
-			padding-bottom: 50px;
-		}
-		.card {
-			.card-tittle {
-				.kanan {
-					float: right;
-				}
-			}
-			.card-text {
-				margin: 30px 30px 30px 30px;
-			}
-		}
-	}
+  background-color: #006a7a;
+  .container {
+    padding-top: 50px;
+    height: 850px;
+    h1 {
+      color: white;
+      text-align: center;
+      padding-bottom: 50px;
+    }
+    .card {
+      .card-tittle {
+        .kanan {
+          float: right;
+        }
+      }
+      .card-text {
+        margin: 30px 30px 30px 30px;
+      }
+      button {
+        width: 50px;
+      }
+    }
+  }
 }
