@@ -4,6 +4,10 @@
   font-family: "Poppins, sans-serif";
 }
 
+#footer .main-content {
+  height: auto;
+}
+
 #footer .double-logo {
   display: -webkit-box;
   display: -ms-flexbox;

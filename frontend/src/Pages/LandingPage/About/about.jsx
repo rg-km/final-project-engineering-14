@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import Banner from "../../../Assets/Images/Landing-About.png";
-import Footer from "../../../Components/Footer/Footer";
 
 const about = () => {
   return (
@@ -32,7 +31,6 @@ const about = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </section>
   );
 };

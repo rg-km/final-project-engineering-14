@@ -18,7 +18,7 @@ import Col from "react-bootstrap/Col";
 
 const Footer = () => (
   <section id="footer">
-    <Container className="text-light">
+    <Container className="main-content  text-light">
       <Row>
         <Col>
           <img src={Logo} className="img-fluid" alt="logo" />
