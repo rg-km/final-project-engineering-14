@@ -21,10 +21,26 @@
   padding-top: 50px;
 }
 
-#OurTeams-page .container .main-content .avatar {
+#OurTeams-page .container .main-content .profile-detail {
+  border-radius: 20px;
+}
+
+#OurTeams-page .container .main-content .profile-detail .avatar {
   width: 150px;
   height: 150px;
   border-radius: 20px;
+}
+
+#OurTeams-page .container .main-content .profile-detail .name {
+  font-size: 24px;
+}
+
+#OurTeams-page .container .main-content .profile-detail .name span {
+  font-size: 18px;
+}
+
+#OurTeams-page .container .main-content .profile-detail .name span .color {
+  color: #fbcb49;
 }
 
 #OurTeams-page .container .main-content span {

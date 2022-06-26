@@ -24,7 +24,7 @@ export default function Dashboard() {
 				Authorization: "Bearer " + auth,
 			},
 		});
-		console.log(res.data);
+		// console.log(res.data);
 		// console.log(res.data.length);
 		// if (!res.data === { null: "null" }) {
 		// setCheck(false);
@@ -39,7 +39,7 @@ export default function Dashboard() {
 		getPosts();
 	}, []);
 
-	console.warn(posts);
+	// console.warn(posts);
 
 	function deleteQuestion(id) {
 		fetch(apiDeletes + `${id}`, {
@@ -53,14 +53,14 @@ export default function Dashboard() {
 			// console.log(posts.questionQuestion);
 			.then((result) => {
 				result.json().then((res) => {
-					console.warn(res);
+					// console.warn(res);
 					getPosts();
 				});
 			});
 	}
 
 	function handleUpdate(id, props) {
-		console.log(id);
+		// console.log(id);
 		navigate("/Update" + id);
 	}
 
