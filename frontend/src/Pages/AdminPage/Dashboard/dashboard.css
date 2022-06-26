@@ -45,4 +45,10 @@
 #dashboard-pages .table td {
   border: 0px;
 }
+
+#dashboard-pages .table .table-body .tr-class,
+#dashboard-pages .table tr .tr-class,
+#dashboard-pages .table td .tr-class {
+  border-bottom: 1px solid black;
+}
 /*# sourceMappingURL=dashboard.css.map */

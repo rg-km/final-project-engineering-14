@@ -20,4 +20,8 @@
 #question-page .container .card .card-text {
   margin: 30px 30px 30px 30px;
 }
+
+#question-page .container .card button {
+  width: 50px;
+}
 /*# sourceMappingURL=question.css.map */
