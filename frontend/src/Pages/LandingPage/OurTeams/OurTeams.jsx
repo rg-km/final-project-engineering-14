@@ -11,11 +11,11 @@ import Container from "react-bootstrap/Container";
 
 // Assets
 import Team1 from "../../../Assets/Images/Team1.png";
-// import Team2 from "../../../Assets/Images/Team2.png";
+import Team2 from "../../../Assets/Images/Team2.png";
 import Team3 from "../../../Assets/Images/Team3.png";
-// import Team4 from "../../../Assets/Images/Team4.png";
+import Team4 from "../../../Assets/Images/Team4.png";
 import Team5 from "../../../Assets/Images/Team5.png";
-// import Team6 from "../../../Assets/Images/Team6.png";
+import Team6 from "../../../Assets/Images/Team6.png";
 
 export default function OurTeams() {
 	return (
@@ -55,7 +55,7 @@ export default function OurTeams() {
 								<Row>
 									<Col className="col-4 p-3 ps-3">
 										<img
-											src={"/"}
+											src={Team2}
 											className="avatar img-fluid rounded-circle ms-3"
 											alt="logo"
 										/>
@@ -103,7 +103,7 @@ export default function OurTeams() {
 								<Row>
 									<Col className="col-4 p-3 ps-3">
 										<img
-											src={"/"}
+											src={Team4}
 											className="avatar img-fluid rounded-circle ms-3"
 											alt="logo"
 										/>
@@ -150,7 +150,7 @@ export default function OurTeams() {
 								<Row>
 									<Col className="col-4 p-3 ps-3">
 										<img
-											src={"/"}
+											src={Team6}
 											className="avatar img-fluid rounded-circle ms-3"
 											alt="logo"
 										/>
