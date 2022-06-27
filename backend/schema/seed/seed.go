@@ -16,27 +16,35 @@ func Seed(db *sql.DB) {
 	VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 	INSERT INTO programming_languanges
-	(name, created_at, updated_at)
+	(name, url_images, created_at, updated_at)
 	VALUES
-	('Go', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Python', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Java', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('C#', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Ruby', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('PHP', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Kotlin', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Rust', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Scala', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('JavaScript', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Solidity', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Perl', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
+	('Go', 'https://www.linkpicture.com/q/go_1.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Python', 'https://www.linkpicture.com/q/python_1.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Java', 'https://www.linkpicture.com/q/java_3.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('C#', 'https://www.linkpicture.com/q/cs_2.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Ruby', 'https://www.linkpicture.com/q/ruby_1.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('PHP', 'https://www.linkpicture.com/q/php_2.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Rust', 'https://www.linkpicture.com/q/rust_5.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('JavaScript', 'https://www.linkpicture.com/q/js_16.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00');
 	
 	INSERT INTO answers
 	(answer, created_at, updated_at)
 	VALUES
-	('Really Understand', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Understand', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-	('Do Not Understand', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
+	('Really Understand', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Understand', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Do Not Understand', '2022-06-01 00:00:00', '2022-06-01 00:00:00');
+
+	INSERT INTO levels 
+	(level, created_at, updated_at)
+	VALUES
+	('Beginner', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Intermediate', '2022-06-01 00:00:00', '2022-06-01 00:00:00');
+
+	INSERT INTO recommendations
+	(image_url, level_id, created_at, updated_at)
+	VALUES
+	('https://www.linkpicture.com/q/Basic_1.png', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('https://www.linkpicture.com/q/Intermediate.png', 2, '2022-06-01 00:00:00', '2022-06-01 00:00:00');
 	`
 
 	hashed := security.GeneratePasswordHash("admin123")

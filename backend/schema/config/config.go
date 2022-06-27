@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	dbname = "fpe_14"
+	dbname = "fpe_14_last"
 )
 
 func DBConnect() (*sql.DB, error) {

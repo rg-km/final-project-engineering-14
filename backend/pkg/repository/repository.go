@@ -20,13 +20,15 @@ type FrontendRepository interface {
 	GetQuestionByProgrammingLanguange(proglangId, perPage, page int32) ([]web.QuestionRequest, error)
 	SaveAnswersAttempt(userId int32, webReq []domain.AnswersDomain) (bool, error)
 	CountAnswersAttempt(userId int32) (int32, error)
+	FindLevelByName(levelName string) (domain.LevelDomain, error)
+	FindRecommendationByLevelId(levelId int32) (domain.RecommendationDomain, error)
 }
 
 type BackendRepository interface {
 	SaveQuestion(question domain.QuestionDomain, progLang domain.ProgrammingLanguangeDomain, userId int32) (domain.QuestionDomain, error)
 	GetQuestions() ([]web.QuestionRequest, error)
 	GetCountQuestions() ([]web.CountQuestionResponse, error)
-	UpdateQuestion(proglang domain.ProgrammingLanguangeDomain, question web.QuestionRequest, questionId int32) (bool, error)
+	UpdateQuestion(proglang domain.ProgrammingLanguangeDomain, question web.QuestionRequest, questionId int32) (web.QuestionResponse, error)
 	DeleteQuestion(questionId int32) (bool, error)
 	GetAnswers() ([]domain.AnswersDomain, error)
 }

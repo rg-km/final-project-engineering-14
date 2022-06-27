@@ -86,5 +86,11 @@ func (handler *Handler) InitRoutes() *httprouter.Router {
 		),
 	)
 
+	router.GET("/home/recommendation/:levelId",
+		handler.AuthMiddleWare(
+			handler.seeRecommendationByLevelId,
+		),
+	)
+
 	return router
 }
