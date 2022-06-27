@@ -33,7 +33,7 @@ export default function Register() {
 					},
 				}
 			);
-			console.log(res);
+			// console.log(res);
 			if (res.status === 200) {
 				navigate("/");
 			}
