@@ -49,20 +49,14 @@ export const Login = () => {
 				} else {
 					return res.json().then((data) => {
 						let errorMassage = "Authentication failed!";
-						// if (data && data.error && data.error.message) {
-						// 	errorMassage = data.error.message;
-						// }
-
 						throw new Error(errorMassage);
 					});
 				}
 			})
 			.then((data) => {
-				// console.log(data.data.token);
 				authCtx.login(data.data.token, data.data.role);
 			})
 			.catch((err) => {
-				// alert(err.message);
 				alert("Data yang anda masukkan salah, silahkan di cek!");
 			});
 	};

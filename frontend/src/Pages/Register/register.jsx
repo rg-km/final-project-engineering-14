@@ -5,7 +5,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import API from "../../Api/Api";
-// import { Link } from "react-router-dom";
 
 export default function Register() {
 	const navigate = useNavigate();
@@ -33,7 +32,6 @@ export default function Register() {
 					},
 				}
 			);
-			// console.log(res);
 			if (res.status === 200) {
 				navigate("/");
 			}

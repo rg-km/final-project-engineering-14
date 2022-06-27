@@ -14,8 +14,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { NavItem } from "react-bootstrap";
-// import Card from "react-bootstrap/Card";
-// import Image from "react-bootstrap/Image";
 
 function HomeNavbar() {
 	const authCtx = useContext(AuthContext);
@@ -60,11 +58,6 @@ function HomeNavbar() {
 									</Button>
 								</Nav>
 							</Nav>
-							{/* <Card style={{ width: "200px", height: "60px" }}>
-								<Card.Img src={Avatar} className="card-avatar" /> */}
-
-							{/* <Card.Text>Your Name</Card.Text> */}
-							{/* </Card> */}
 						</Navbar.Collapse>
 					</Row>
 				</Container>
