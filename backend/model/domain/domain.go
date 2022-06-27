@@ -17,6 +17,7 @@ type UserDomain struct {
 type ProgrammingLanguangeDomain struct {
 	Id        int32
 	Name      string
+	UrlImages string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -33,6 +34,20 @@ type QuestionDomain struct {
 type AnswersDomain struct {
 	Id        int32
 	Answer    string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
+
+type LevelDomain struct {
+	Id        int32
+	Level     string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
+
+type RecommendationDomain struct {
+	Id        int32
+	ImageUrl  string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

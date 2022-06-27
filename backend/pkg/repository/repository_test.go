@@ -27,24 +27,24 @@ var _ = Describe("Repository Test", func() {
 		}
 
 		_, err = db.Exec(`
-			CREATE TABLE users (
-				id INTEGER PRIMARY KEY AUTOINCREMENT,
-				username TEXT,
-				email TEXT,
-				password TEXT,
-				phone TEXT,
-				role TEXT,
-				is_login BOOLEAN,
-				created_at DATETIME,
-				updated_at DATETIME
-			);
+		CREATE TABLE IF NOT EXISTS users (
+			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			username VARCHAR(255) NOT NULL,
+			email VARCHAR(150) NOT NULL,
+			password VARCHAR(255) NOT NULL,
+			phone VARCHAR(50) NOT NULL,
+			role VARCHAR(15) NOT NULL,
+			is_login BOOLEAN NOT NULL,
+			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP 
+		);
 			
-			CREATE TABLE IF NOT EXISTS answers (
-				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-				answer VARCHAR(50) NOT NULL,
-				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-				updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-			);
+		CREATE TABLE IF NOT EXISTS answers (
+			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			answer VARCHAR(50) NOT NULL,
+			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+		);
 
 			CREATE TABLE IF NOT EXISTS questions (
 				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -58,6 +58,7 @@ var _ = Describe("Repository Test", func() {
 			CREATE TABLE IF NOT EXISTS programming_languanges (
 				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 				name VARCHAR(15) NOT NULL,
+				url_images VARCHAR(255) NOT NULL,
 				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 			);
@@ -83,21 +84,16 @@ var _ = Describe("Repository Test", func() {
 			('Do Not Understand', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
 
 			INSERT INTO programming_languanges
-				(name, created_at, updated_at)
+				(name, url_images, created_at, updated_at)
 			VALUES
-			('Go', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Python', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Java', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('C#', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Ruby', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('PHP', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Kotlin', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Rust', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Scala', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('JavaScript', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('SQL', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Solidity', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Perl', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
+			('Go', 'https://www.linkpicture.com/q/go_1.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('Python', 'https://www.linkpicture.com/q/python_1.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('Java', 'https://www.linkpicture.com/q/java_3.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('C#', 'https://www.linkpicture.com/q/cs_2.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('Ruby', 'https://www.linkpicture.com/q/ruby_1.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('PHP', 'https://www.linkpicture.com/q/php_2.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('Rust', 'https://www.linkpicture.com/q/rust_5.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('JavaScript', 'https://www.linkpicture.com/q/js_16.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
 
 			INSERT INTO questions
 				(question, proglang_id, created_at, updated_at)
@@ -275,19 +271,20 @@ var _ = Describe("Repository Test", func() {
 
 	Describe("Update Question", func() {
 		When("Update Question successfully", func() {
-			It("should return true", func() {
+			FIt("should return question response", func() {
 				updateSuccess, err := backendRepo.UpdateQuestion(domain.ProgrammingLanguangeDomain{
-					Id:        1,
-					Name:      "Go",
-					CreatedAt: time.Now(),
-					UpdatedAt: time.Now(),
+					Id:   1,
+					Name: "Go",
 				}, web.QuestionRequest{
+					Id:                   1,
 					ProgrammingLanguange: "Go",
 					Question:             "Are you familiar with how pointer work and use in Golang?",
-				}, int32(4))
+				}, int32(1))
 				Expect(err).ToNot(HaveOccurred())
 
-				Expect(updateSuccess).To(Equal(true))
+				Expect(updateSuccess.Id).To(Equal(int32(1)))
+				Expect(updateSuccess.Question).To(Equal("Are you familiar with how pointer work and use in Golang?"))
+				Expect(updateSuccess.ProgrammingLanguange).To(Equal("Go"))
 			})
 		})
 	})
@@ -325,54 +322,42 @@ var _ = Describe("Repository Test", func() {
 				Expect(proglang).To(Equal([]domain.ProgrammingLanguangeDomain{
 					{Id: 1,
 						Name:      "Go",
+						UrlImages: "https://www.linkpicture.com/q/go_1.png",
 						CreatedAt: time.Time{},
 						UpdatedAt: time.Time{}},
 					{Id: 2,
 						Name:      "Python",
+						UrlImages: "https://www.linkpicture.com/q/python_1.png",
 						CreatedAt: time.Time{},
 						UpdatedAt: time.Time{}},
 					{Id: 3,
 						Name:      "Java",
+						UrlImages: "https://www.linkpicture.com/q/java_3.png",
 						CreatedAt: time.Time{},
 						UpdatedAt: time.Time{}},
 					{Id: 4,
 						Name:      "C#",
+						UrlImages: "https://www.linkpicture.com/q/cs_2.png",
 						CreatedAt: time.Time{},
 						UpdatedAt: time.Time{}},
 					{Id: 5,
 						Name:      "Ruby",
+						UrlImages: "https://www.linkpicture.com/q/ruby_1.png",
 						CreatedAt: time.Time{},
 						UpdatedAt: time.Time{}},
 					{Id: 6,
 						Name:      "PHP",
+						UrlImages: "https://www.linkpicture.com/q/php_2.png",
 						CreatedAt: time.Time{},
 						UpdatedAt: time.Time{}},
 					{Id: 7,
-						Name:      "Kotlin",
+						Name:      "Rust",
+						UrlImages: "https://www.linkpicture.com/q/rust_5.png",
 						CreatedAt: time.Time{},
 						UpdatedAt: time.Time{}},
 					{Id: 8,
-						Name:      "Rust",
-						CreatedAt: time.Time{},
-						UpdatedAt: time.Time{}},
-					{Id: 9,
-						Name:      "Scala",
-						CreatedAt: time.Time{},
-						UpdatedAt: time.Time{}},
-					{Id: 10,
 						Name:      "JavaScript",
-						CreatedAt: time.Time{},
-						UpdatedAt: time.Time{}},
-					{Id: 11,
-						Name:      "SQL",
-						CreatedAt: time.Time{},
-						UpdatedAt: time.Time{}},
-					{Id: 12,
-						Name:      "Solidity",
-						CreatedAt: time.Time{},
-						UpdatedAt: time.Time{}},
-					{Id: 13,
-						Name:      "Perl",
+						UrlImages: "https://www.linkpicture.com/q/js_16.png",
 						CreatedAt: time.Time{},
 						UpdatedAt: time.Time{}},
 				}))
@@ -403,8 +388,10 @@ var _ = Describe("Repository Test", func() {
 				Expect(err).ToNot(HaveOccurred())
 
 				Expect(question).To(Equal([]web.QuestionRequest{
-					{ProgrammingLanguange: "Go",
-						Question: "How well do you know about packages in Go programs"},
+					{
+						Id:                   1,
+						ProgrammingLanguange: "Go",
+						Question:             "How well do you know about packages in Go programs"},
 				}))
 			})
 		})

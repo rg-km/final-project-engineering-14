@@ -20,6 +20,7 @@ type RegisterRequest struct {
 }
 
 type QuestionRequest struct {
+	Id                   int32  `json:"id"`
 	ProgrammingLanguange string `json:"programming_languange"`
 	Question             string `json:"question"`
 }
