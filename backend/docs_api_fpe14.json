@@ -636,6 +636,10 @@
                       "items": {
                         "type": "object",
                         "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
                           "name": {
                             "type": "string"
                           },
@@ -652,14 +656,17 @@
                   "message": "SUCCESS",
                   "data": [
                     {
+                      "id": 1,
                       "name": "Go",
                       "url_images": "https://www.linkpicture.com/q/go_1.png"
                     },
                     {
+                      "id": 2,
                       "name": "Javascript",
                       "url_images": "https://www.linkpicture.com/q/js_16.png"
                     },
                     {
+                      "id": 3,
                       "name": "Ruby",
                       "url_images": "https://www.linkpicture.com/q/ruby_1.png"
                     }

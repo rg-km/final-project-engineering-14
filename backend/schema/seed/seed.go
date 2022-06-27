@@ -26,6 +26,19 @@ func Seed(db *sql.DB) {
 	('PHP', 'https://www.linkpicture.com/q/php_2.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
 	('Rust', 'https://www.linkpicture.com/q/rust_5.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
 	('JavaScript', 'https://www.linkpicture.com/q/js_16.png', '2022-06-01 00:00:00', '2022-06-01 00:00:00');
+
+	INSERT INTO questions
+	(question, proglang_id, created_at, updated_at)
+	VALUES
+	('How well do you understand about variable scope in Golang ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('How well do you understand using the for loop in Golang ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Are you familiar with how array, slice, and maps work and use in Golang ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('How well do you know about packages in Go programs ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('How well do you understand about variable scope in Golang ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Are you familiar with how struct work and use in Golang ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Are you familiar with how interface work and use in Golang ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Do you have an understanding of unit test ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+	('Do you have an understanding of Web Servers in Golang ?', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00');
 	
 	INSERT INTO answers
 	(answer, created_at, updated_at)
