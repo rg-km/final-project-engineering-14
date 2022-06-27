@@ -9,16 +9,21 @@
       padding-bottom: 50px;
     }
     .card {
+      border-radius: 30px;
+      padding-bottom: 20px;
       .card-tittle {
-        .kanan {
-          float: right;
-        }
+        padding-left: 30px;
+        padding-top: 20px;
       }
       .card-text {
         margin: 30px 30px 30px 30px;
       }
       button {
-        width: 50px;
+        width: 800px;
+        height: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
       }
     }
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import "./Level.css";
 import Banner from "../../Assets/Images/Level-image.png";
@@ -12,7 +12,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function Level() {
+  const navigate = useNavigate();
   const level = JSON.parse(localStorage.getItem("Level"));
+
+  const handleRecommendation = () => {
+    console.log("ini level id", level.level_id);
+    localStorage.setItem("level_id", level.level_id);
+    navigate("/Recommendation");
+  };
   return (
     <section id="level-pages">
       <Container>
@@ -36,9 +43,7 @@ export default function Level() {
               </Card>
             </div>
             <div className="recommendation">
-              <Link to="/Recomendation">
-                <button>SEE RECOMMENDATION</button>
-              </Link>
+              <button onClick={handleRecommendation}>SEE RECOMMENDATION</button>
             </div>
           </Col>
         </Row>

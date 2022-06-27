@@ -15,4 +15,18 @@
   border-radius: 20px;
   margin-bottom: 50px;
 }
+
+#recomendation-page .container-luar .images {
+  width: 1000px;
+  height: 600px;
+  margin-left: 150px;
+  margin-right: auto;
+}
+
+#recomendation-page .container-luar .btn-done {
+  margin-left: 450px;
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
+}
 /*# sourceMappingURL=recomendation.css.map */

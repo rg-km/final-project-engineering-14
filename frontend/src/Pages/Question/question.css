@@ -13,8 +13,14 @@
   padding-bottom: 50px;
 }
 
-#question-page .container .card .card-tittle .kanan {
-  float: right;
+#question-page .container .card {
+  border-radius: 30px;
+  padding-bottom: 20px;
+}
+
+#question-page .container .card .card-tittle {
+  padding-left: 30px;
+  padding-top: 20px;
 }
 
 #question-page .container .card .card-text {
@@ -22,6 +28,10 @@
 }
 
 #question-page .container .card button {
-  width: 50px;
+  width: 800px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
 }
 /*# sourceMappingURL=question.css.map */

@@ -1,15 +1,29 @@
 #recomendation-page {
-	background-color: #006a7a;
-	height: 1000px;
-	.title {
-		color: white;
-	}
-	.container-luar {
-		padding-top: 20px;
-		color: black;
-		background-color: white;
-		height: 700px;
-		border-radius: 20px;
-		margin-bottom: 50px;
-	}
+  background-color: #006a7a;
+  height: 1000px;
+  .title {
+    color: white;
+  }
+  .container-luar {
+    padding-top: 20px;
+    color: black;
+    background-color: white;
+    height: 700px;
+    border-radius: 20px;
+    margin-bottom: 50px;
+
+    .images {
+      width: 1000px;
+      height: 600px;
+      margin-left: 150px;
+      margin-right: auto;
+    }
+
+    .btn-done {
+      margin-left: 450px;
+      width: 400px;
+      height: 50px;
+      border-radius: 20px;
+    }
+  }
 }
