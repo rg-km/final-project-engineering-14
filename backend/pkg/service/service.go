@@ -18,13 +18,14 @@ type FrontendService interface {
 	GetProgrammingLanguanges() ([]web.ProgrammingLanguageResponse, error)
 	GetQuestionByProgrammingLanguage(proglangId, perPage, page int32) ([]web.QuestionCreateResponse, error)
 	PostAnswersAttempt(userId int32, answers web.AnswersAttemptRequest) (web.TotalAnswerAttemptResponse, error)
+	SeeRecommendationByLevelId(levelId int32) (web.RecommendationResponse, error)
 }
 
 type BackendService interface {
 	CreateAdminQuestion(userId int32, question web.QuestionRequest) (web.QuestionCreateResponse, error)
 	GetAdminQuestions() ([]web.QuestionResponse, error)
 	GetCountQuestions() ([]web.CountQuestionResponse, error)
-	UpdateAdminQuestion(question web.QuestionRequest, questionId int32) (bool, error)
+	UpdateAdminQuestion(question web.QuestionRequest, questionId int32) (web.QuestionResponse, error)
 	DeleteAdminQuestion(questionId int32) (bool, error)
 }
 

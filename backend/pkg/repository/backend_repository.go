@@ -42,7 +42,7 @@ func (repo *BackendRepositorySQLite) SaveQuestion(question domain.QuestionDomain
 
 func (repo *BackendRepositorySQLite) GetQuestions() ([]web.QuestionRequest, error) {
 	query := `
-	SELECT q.question AS question, pl.name AS programming_lang
+	SELECT q.id, q.question AS question, pl.name AS programming_lang
 	FROM questions AS q
 	INNER JOIN programming_languanges AS pl ON pl.id = q.proglang_id;`
 
@@ -53,7 +53,9 @@ func (repo *BackendRepositorySQLite) GetQuestions() ([]web.QuestionRequest, erro
 	var questions []web.QuestionRequest
 	for rows.Next() {
 		var question web.QuestionRequest
-		err := rows.Scan(&question.Question, &question.ProgrammingLanguange)
+		err := rows.Scan(
+			&question.Id, &question.Question, &question.ProgrammingLanguange,
+		)
 		helper.PanicIfError(err)
 
 		questions = append(questions, question)
@@ -93,7 +95,7 @@ func (repo *BackendRepositorySQLite) GetCountQuestions() ([]web.CountQuestionRes
 	return dashboardAdmin, nil
 }
 
-func (repo *BackendRepositorySQLite) UpdateQuestion(proglang domain.ProgrammingLanguangeDomain, question web.QuestionRequest, questionId int32) (bool, error) {
+func (repo *BackendRepositorySQLite) UpdateQuestion(proglang domain.ProgrammingLanguangeDomain, question web.QuestionRequest, questionId int32) (web.QuestionResponse, error) {
 	query := "UPDATE questions SET "
 	qParts := []string{}
 	args := []interface{}{}
@@ -112,10 +114,30 @@ func (repo *BackendRepositorySQLite) UpdateQuestion(proglang domain.ProgrammingL
 	query += ", updated_at = ? WHERE id = ?"
 	args = append(args, time.Now(), questionId)
 
-	_, err := repo.DB.Exec(query, args...)
+	result, err := repo.DB.Exec(query, args...)
 	helper.PanicIfError(err)
 
-	return true, nil
+	_, err = result.LastInsertId()
+	helper.PanicIfError(err)
+
+	var questionResponse web.QuestionResponse
+
+	// select question
+	query = `SELECT q.id, q.question, pl.name
+	FROM questions AS q
+	INNER JOIN programming_languanges AS pl ON pl.id = q.proglang_id
+	WHERE q.id = ?;`
+
+	row := repo.DB.QueryRow(query, questionId)
+	helper.PanicIfError(err)
+
+	err = row.Scan(
+		&questionResponse.Id, &questionResponse.Question,
+		&questionResponse.ProgrammingLanguange,
+	)
+	helper.PanicIfError(err)
+
+	return questionResponse, nil
 }
 
 func (repo *BackendRepositorySQLite) DeleteQuestion(questionId int32) (bool, error) {

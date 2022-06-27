@@ -66,7 +66,7 @@ func (service *BackendSQLite) GetCountQuestions() ([]web.CountQuestionResponse, 
 	return helper.ToCountQuestionDashboardAdmin(countQuestion), nil
 }
 
-func (service *BackendSQLite) UpdateAdminQuestion(question web.QuestionRequest, questionId int32) (bool, error) {
+func (service *BackendSQLite) UpdateAdminQuestion(question web.QuestionRequest, questionId int32) (web.QuestionResponse, error) {
 	var progLangDomain domain.ProgrammingLanguangeDomain
 
 	if question.ProgrammingLanguange != "" {
@@ -76,12 +76,12 @@ func (service *BackendSQLite) UpdateAdminQuestion(question web.QuestionRequest, 
 		progLangDomain = progLangDomainRepo
 	}
 
-	_, err := service.backendRepository.UpdateQuestion(
+	updateResponse, err := service.backendRepository.UpdateQuestion(
 		progLangDomain, question, questionId,
 	)
 	helper.PanicIfError(err)
 
-	return true, nil
+	return helper.ToUpdateQuestionResponse(updateResponse), nil
 }
 
 func (service *BackendSQLite) DeleteAdminQuestion(questionId int32) (bool, error) {

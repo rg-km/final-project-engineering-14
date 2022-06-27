@@ -161,6 +161,13 @@
                     "data": {
                       "type": "object",
                       "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
                         "role": {
                           "type": "string",
                           "description": "Role string",
@@ -179,6 +186,8 @@
                   "status": 200,
                   "message": "LOGIN OK",
                   "data": {
+                    "id": 1,
+                    "username": "Admin",
                     "role": "admin",
                     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTU4NzA2NzMsImlhdCI6MTY1NTg2ODg3MywiaXNzIjoidG9kby1hcHAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsInVzZXJfaWQiOjF9.TnZ4bMDrPcxHeIECJzvWu7oJbZZ-olxJm8as3HMyj78"
                   }
@@ -331,6 +340,10 @@
                       "items": {
                         "type": "object",
                         "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
                           "question": {
                             "type": "string"
                           },
@@ -347,10 +360,12 @@
                   "message": "SUCCESS",
                   "data": [
                     {
+                      "id": 1,
                       "question": "Seberapa Pahamnya Anda Tentang Bahasa Pemrograman GO ?",
                       "programming_languange": "Go"
                     },
                     {
+                      "id": 2,
                       "total_question": "Apakah Anda Sudah Mengerti Cara Menggunakan Framework Spring ?",
                       "programming_languange": "Java"
                     }
@@ -527,7 +542,10 @@
                 "example": {
                   "status": 200,
                   "message": "UPDATE OK",
-                  "data": {}
+                  "data": {
+                    "programming_languange": "Java",
+                    "question": "Seberapa pahamnya anda tentang bahasa Java ?"
+                  }
                 }
               }
             }
@@ -620,6 +638,9 @@
                         "properties": {
                           "name": {
                             "type": "string"
+                          },
+                          "url_images": {
+                            "type": "string"
                           }
                         }
                       }
@@ -631,13 +652,16 @@
                   "message": "SUCCESS",
                   "data": [
                     {
-                      "name": "Go"
+                      "name": "Go",
+                      "url_images": "https://www.linkpicture.com/q/go_1.png"
                     },
                     {
-                      "name": "Javascript"
+                      "name": "Javascript",
+                      "url_images": "https://www.linkpicture.com/q/js_16.png"
                     },
                     {
-                      "name": "Ruby"
+                      "name": "Ruby",
+                      "url_images": "https://www.linkpicture.com/q/ruby_1.png"
                     }
                   ]
                 }
@@ -831,6 +855,10 @@
                     "data": {
                       "type": "object",
                       "properties": {
+                        "level_id": {
+                          "type": "integer",
+                          "format": "int32"
+                        },
                         "username": {
                           "type": "string"
                         },
@@ -849,9 +877,67 @@
                   "status": 200,
                   "message": "POST OK",
                   "data": {
+                    "level_id": 2,
                     "username": "Mas Sopo",
                     "level": "Intermediate",
                     "score": 80
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/home/recommendation/{levelId}": {
+      "get": {
+        "tags": ["Home API"],
+        "summary": "Recommendation Learning",
+        "description": "Recommendation Learning for User",
+        "parameters": [
+          {
+            "name": "token",
+            "description": "Need Token in Cookie",
+            "required": true,
+            "in": "cookie"
+          },
+          {
+            "name": "levelId",
+            "description": "Include Level Id",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recommendation Learning Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "image_url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "status": 200,
+                  "message": "GET OK",
+                  "data": {
+                    "image_url": "https://www.linkpicture.com/q/Intermediate.png"
                   }
                 }
               }

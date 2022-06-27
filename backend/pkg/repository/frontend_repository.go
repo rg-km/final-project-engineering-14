@@ -19,7 +19,7 @@ func NewFrontendRepository(db *sql.DB) *FrontendRepositorySQLite {
 }
 
 func (repo *FrontendRepositorySQLite) GetProgrammingLanguanges() ([]domain.ProgrammingLanguangeDomain, error) {
-	query := `SELECT pl.id, pl.name FROM programming_languanges AS pl`
+	query := `SELECT pl.id, pl.name, pl.url_images FROM programming_languanges AS pl`
 
 	rows, err := repo.DB.Query(query)
 	helper.PanicIfError(err)
@@ -27,7 +27,9 @@ func (repo *FrontendRepositorySQLite) GetProgrammingLanguanges() ([]domain.Progr
 	var programmingLanguages []domain.ProgrammingLanguangeDomain
 	for rows.Next() {
 		var programmingLanguage domain.ProgrammingLanguangeDomain
-		err = rows.Scan(&programmingLanguage.Id, &programmingLanguage.Name)
+		err = rows.Scan(
+			&programmingLanguage.Id, &programmingLanguage.Name, &programmingLanguage.UrlImages,
+		)
 		helper.PanicIfError(err)
 
 		programmingLanguages = append(programmingLanguages, programmingLanguage)
@@ -61,7 +63,7 @@ func (repo *FrontendRepositorySQLite) GetProgrammingLanguangeByName(progLangName
 
 func (repo *FrontendRepositorySQLite) GetQuestionByProgrammingLanguange(progLangId, perPage, page int32) ([]web.QuestionRequest, error) {
 	query := `
-	SELECT DISTINCT q.question, pl.name
+	SELECT DISTINCT q.id, q.question, pl.name
 	FROM questions AS q
 	INNER JOIN programming_languanges AS pl ON pl.id = q.proglang_id
 	WHERE pl.id = ?
@@ -75,7 +77,7 @@ func (repo *FrontendRepositorySQLite) GetQuestionByProgrammingLanguange(progLang
 	var questions []web.QuestionRequest
 	for rows.Next() {
 		var question web.QuestionRequest
-		err := rows.Scan(&question.Question, &question.ProgrammingLanguange)
+		err := rows.Scan(&question.Id, &question.Question, &question.ProgrammingLanguange)
 		helper.PanicIfError(err)
 
 		questions = append(questions, question)
@@ -122,4 +124,42 @@ func (repo *FrontendRepositorySQLite) CountAnswersAttempt(userId int32) (int32, 
 	helper.PanicIfError(err)
 
 	return total, nil
+}
+
+func (repo *FrontendRepositorySQLite) FindLevelByName(levelName string) (domain.LevelDomain, error) {
+	query := `
+	SELECT l.id, l.level, l.created_at, l.updated_at 
+	FROM levels AS l 
+	WHERE level = ?;`
+
+	var level domain.LevelDomain
+	row := repo.DB.QueryRow(query, levelName)
+	err := row.Scan(
+		&level.Id,
+		&level.Level,
+		&level.CreatedAt,
+		&level.UpdatedAt,
+	)
+	helper.PanicIfError(err)
+
+	return level, nil
+}
+
+func (repo *FrontendRepositorySQLite) FindRecommendationByLevelId(levelId int32) (domain.RecommendationDomain, error) {
+	query := `
+	SELECT r.id, r.image_url, r.created_at, r.updated_at 
+	FROM recommendations AS r 
+	WHERE r.level_id = ?;`
+
+	var recommendation domain.RecommendationDomain
+	row := repo.DB.QueryRow(query, levelId)
+	err := row.Scan(
+		&recommendation.Id,
+		&recommendation.ImageUrl,
+		&recommendation.CreatedAt,
+		&recommendation.UpdatedAt,
+	)
+	helper.PanicIfError(err)
+
+	return recommendation, nil
 }

@@ -29,7 +29,9 @@ func (service *FrontendServiceSQLite) GetProgrammingLanguanges() ([]web.Programm
 }
 
 func (service *FrontendServiceSQLite) GetQuestionByProgrammingLanguage(proglangId, perPage, page int32) ([]web.QuestionCreateResponse, error) {
-	lists, err := service.frontendRepository.GetQuestionByProgrammingLanguange(proglangId, perPage, page)
+	lists, err := service.frontendRepository.GetQuestionByProgrammingLanguange(
+		proglangId, perPage, page,
+	)
 	helper.PanicIfError(err)
 
 	answers, err := service.backendRepository.GetAnswers()
@@ -40,7 +42,8 @@ func (service *FrontendServiceSQLite) GetQuestionByProgrammingLanguage(proglangI
 
 func (service *FrontendServiceSQLite) PostAnswersAttempt(userId int32, answers web.AnswersAttemptRequest) (web.TotalAnswerAttemptResponse, error) {
 	var level string
-	test1 := []domain.AnswersDomain{
+	var levelDomain domain.LevelDomain
+	answersDomain := []domain.AnswersDomain{
 		{Answer: answers.AnswerOne},
 		{Answer: answers.AnswerTwo},
 		{Answer: answers.AnswerThree},
@@ -53,19 +56,33 @@ func (service *FrontendServiceSQLite) PostAnswersAttempt(userId int32, answers w
 		{Answer: answers.AnswerTen},
 	}
 
-	_, err := service.frontendRepository.SaveAnswersAttempt(userId, test1)
+	_, err := service.frontendRepository.SaveAnswersAttempt(userId, answersDomain)
 	helper.PanicIfError(err)
 
 	score, err := service.frontendRepository.CountAnswersAttempt(userId)
+	helper.PanicIfError(err)
 
 	if score >= 75 {
-		level = "INTERMEDIATE"
+		level = "Intermediate"
 	} else {
-		level = "BEGINNER"
+		level = "Beginner"
+	}
+
+	if level != "" {
+		levelResp, err := service.frontendRepository.FindLevelByName(level)
+		helper.PanicIfError(err)
+		levelDomain = levelResp
 	}
 
 	user, err := service.authrepository.GetUserById(userId)
 	helper.PanicIfError(err)
 
-	return helper.ToAnswerAttemptResponse(user, score, level), nil
+	return helper.ToAnswerAttemptResponse(user, score, levelDomain), nil
+}
+
+func (service *FrontendServiceSQLite) SeeRecommendationByLevelId(levelId int32) (web.RecommendationResponse, error) {
+	lists, err := service.frontendRepository.FindRecommendationByLevelId(levelId)
+	helper.PanicIfError(err)
+
+	return helper.ToRecommendationResponses(lists), nil
 }

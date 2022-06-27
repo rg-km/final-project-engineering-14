@@ -28,24 +28,24 @@ var _ = Describe("Service Test", func() {
 		}
 
 		_, err = db.Exec(`
-			CREATE TABLE users (
-				id INTEGER PRIMARY KEY AUTOINCREMENT,
-				username TEXT,
-				email TEXT,
-				password TEXT,
-				phone TEXT,
-				role TEXT,
-				is_login BOOLEAN,
-				created_at DATETIME,
-				updated_at DATETIME
-			);
-
-			CREATE TABLE IF NOT EXISTS answers (
-				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-				answer VARCHAR(50) NOT NULL,
-				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-				updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-			);
+		CREATE TABLE IF NOT EXISTS users (
+			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			username VARCHAR(255) NOT NULL,
+			email VARCHAR(150) NOT NULL,
+			password VARCHAR(255) NOT NULL,
+			phone VARCHAR(50) NOT NULL,
+			role VARCHAR(15) NOT NULL,
+			is_login BOOLEAN NOT NULL,
+			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP 
+		);
+			
+		CREATE TABLE IF NOT EXISTS answers (
+			id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			answer VARCHAR(50) NOT NULL,
+			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+		);
 
 			CREATE TABLE IF NOT EXISTS questions (
 				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -59,6 +59,7 @@ var _ = Describe("Service Test", func() {
 			CREATE TABLE IF NOT EXISTS programming_languanges (
 				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 				name VARCHAR(15) NOT NULL,
+				url_images VARCHAR(255) NOT NULL,
 				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 				updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 			);
@@ -68,6 +69,22 @@ var _ = Describe("Service Test", func() {
 				user_id INTEGER NOT NULL,
 				answer VARCHAR(50) NOT NULL,
 				FOREIGN KEY (user_id) REFERENCES users(id)
+			);
+
+			CREATE TABLE IF NOT EXISTS levels (
+				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+				level VARCHAR(15) NOT NULL,
+				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+			);
+
+			CREATE TABLE IF NOT EXISTS recommendations (
+				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+			  image_url TEXT NOT NULL,
+				level_id INTEGER NOT NULL,
+				created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				FOREIGN KEY (level_id) REFERENCES levels(id)
 			);
 
 			INSERT INTO users (
@@ -84,21 +101,16 @@ var _ = Describe("Service Test", func() {
 			('Do Not Understand', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
 
 			INSERT INTO programming_languanges
-				(name, created_at, updated_at)
+				(name, url_images, created_at, updated_at)
 			VALUES
-			('Go', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Python', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Java', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('C#', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Ruby', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('PHP', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Kotlin', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Rust', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Scala', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('JavaScript', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('SQL', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Solidity', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('Perl', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
+			('Go', 'https://www.linkpicture.com/q/go_1.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('Python', 'https://www.linkpicture.com/q/python_1.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('Java', 'https://www.linkpicture.com/q/java_3.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('C#', 'https://www.linkpicture.com/q/cs_2.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('Ruby', 'https://www.linkpicture.com/q/ruby_1.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('PHP', 'https://www.linkpicture.com/q/php_2.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('Rust', 'https://www.linkpicture.com/q/rust_5.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('JavaScript', 'https://www.linkpicture.com/q/js_16.png', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
 
 			INSERT INTO questions
 				(question, proglang_id, created_at, updated_at)
@@ -113,6 +125,18 @@ var _ = Describe("Service Test", func() {
 			(1, 'Do Not Understand'),
 			(1, 'Understand'),
 			(1, 'Really Understand');
+
+			INSERT INTO levels 
+			(level, created_at, updated_at)
+			VALUES
+			('Beginner', '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+			('Intermediate', '2022-06-01 00:00:00', '2022-06-01 00:00:00');
+		
+			INSERT INTO recommendations
+			(image_url, level_id, created_at, updated_at)
+			VALUES
+			('https://www.linkpicture.com/q/Basic_1.png', 1, '2022-06-01 00:00:00', '2022-06-01 00:00:00'),
+			('https://www.linkpicture.com/q/Intermediate.png', 2, '2022-06-01 00:00:00', '2022-06-01 00:00:00');
 		`)
 
 		if err != nil {
@@ -138,6 +162,8 @@ var _ = Describe("Service Test", func() {
 			DROP TABLE questions;
 			DROP TABLE programming_languanges;
 			DROP TABLE answers_attempts;
+			DROP TABLE levels;
+			DROP TABLE recommendations;
 		`)
 
 		if err != nil {
@@ -232,14 +258,17 @@ var _ = Describe("Service Test", func() {
 
 				Expect(question).To(Equal([]web.QuestionResponse{
 					{
+						Id:                   1,
 						ProgrammingLanguange: "Go",
 						Question:             "How well do you know about packages in Go programs",
 					},
 					{
+						Id:                   2,
 						ProgrammingLanguange: "Go",
 						Question:             "How well do you understand using the for loop in Golang?",
 					},
 					{
+						Id:                   3,
 						ProgrammingLanguange: "Go",
 						Question:             "Are you familiar with how array, slice, and maps work and use in Golang?",
 					},
@@ -273,7 +302,11 @@ var _ = Describe("Service Test", func() {
 				}, 1)
 				Expect(err).To(BeNil())
 
-				Expect(question).To(Equal(true))
+				Expect(question).To(Equal(web.QuestionResponse{
+					Id:                   1,
+					ProgrammingLanguange: "Go",
+					Question:             "How well do you know about packages in Go programs",
+				}))
 			})
 		})
 	})
@@ -296,19 +329,38 @@ var _ = Describe("Service Test", func() {
 				Expect(err).To(BeNil())
 
 				Expect(programmingLanguage).To(Equal([]web.ProgrammingLanguageResponse{
-					{Name: "Go"},
-					{Name: "Python"},
-					{Name: "Java"},
-					{Name: "C#"},
-					{Name: "Ruby"},
-					{Name: "PHP"},
-					{Name: "Kotlin"},
-					{Name: "Rust"},
-					{Name: "Scala"},
-					{Name: "JavaScript"},
-					{Name: "SQL"},
-					{Name: "Solidity"},
-					{Name: "Perl"},
+					{
+						Id:        1,
+						Name:      "Go",
+						UrlImages: "https://www.linkpicture.com/q/go_1.png"},
+					{
+						Id:        2,
+						Name:      "Python",
+						UrlImages: "https://www.linkpicture.com/q/python_1.png"},
+					{
+						Id:        3,
+						Name:      "Java",
+						UrlImages: "https://www.linkpicture.com/q/java_3.png"},
+					{
+						Id:        4,
+						Name:      "C#",
+						UrlImages: "https://www.linkpicture.com/q/cs_2.png"},
+					{
+						Id:        5,
+						Name:      "Ruby",
+						UrlImages: "https://www.linkpicture.com/q/ruby_1.png"},
+					{
+						Id:        6,
+						Name:      "PHP",
+						UrlImages: "https://www.linkpicture.com/q/php_2.png"},
+					{
+						Id:        7,
+						Name:      "Rust",
+						UrlImages: "https://www.linkpicture.com/q/rust_5.png"},
+					{
+						Id:        8,
+						Name:      "JavaScript",
+						UrlImages: "https://www.linkpicture.com/q/js_16.png"},
 				}))
 			})
 		})
@@ -322,6 +374,7 @@ var _ = Describe("Service Test", func() {
 
 				Expect(question).To(Equal([]web.QuestionCreateResponse{
 					{
+						Id:                   1,
 						ProgrammingLanguange: "Go",
 						Question:             "How well do you know about packages in Go programs",
 						Answer: []web.AnswerResponse{
@@ -360,8 +413,21 @@ var _ = Describe("Service Test", func() {
 				Expect(err).To(BeNil())
 
 				Expect(total.Score).To(Equal(int32(20)))
-				Expect(total.Level).To(Equal("BEGINNER"))
+				Expect(total.Level).To(Equal("Beginner"))
 				Expect(total.Username).To(Equal("navis"))
+			})
+		})
+	})
+
+	Describe("Get Recomendation", func() {
+		When("Level Id is valid", func() {
+			It("should return recomendation", func() {
+				seeRecomendation, err := frontendService.SeeRecommendationByLevelId(1)
+				Expect(err).To(BeNil())
+
+				Expect(seeRecomendation).To(Equal(web.RecommendationResponse{
+					ImageUrl: "https://www.linkpicture.com/q/Basic_1.png",
+				}))
 			})
 		})
 	})

@@ -116,3 +116,30 @@ func (handler *Handler) postAnswersAttempt(writer http.ResponseWriter, request *
 
 	helper.WriteToResponseBody(writer, webResponse)
 }
+
+func (handler *Handler) seeRecommendationByLevelId(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
+	levelIdParam := params.ByName("levelId")
+	levelId, err := strconv.Atoi(levelIdParam)
+	helper.PanicIfError(err)
+
+	recommendationResponse, err := handler.service.FrontendService.SeeRecommendationByLevelId(
+		int32(levelId),
+	)
+	if err != nil {
+		writer.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(writer).Encode(web.WebResponse{
+			Status:  http.StatusInternalServerError,
+			Message: http.StatusText(http.StatusInternalServerError),
+			Data:    err.Error(),
+		})
+		return
+	}
+
+	webResponse := web.WebResponse{
+		Status:  http.StatusOK,
+		Message: "GET OK",
+		Data:    recommendationResponse,
+	}
+
+	helper.WriteToResponseBody(writer, webResponse)
+}

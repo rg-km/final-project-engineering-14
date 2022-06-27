@@ -7,21 +7,27 @@ type RegisterResponse struct {
 }
 
 type LoginResponse struct {
-	Role  string `json:"role"`
-	Token string `json:"token"`
+	Id       int32  `json:"id"`
+	Username string `json:"username"`
+	Role     string `json:"role"`
+	Token    string `json:"token"`
 }
 
 type ProgrammingLanguageResponse struct {
-	Name string `json:"name"`
+	Id        int32  `json:"id"`
+	Name      string `json:"name"`
+	UrlImages string `json:"url_images"`
 }
 
 type QuestionCreateResponse struct {
+	Id                   int32            `json:"id"`
 	ProgrammingLanguange string           `json:"programming_languange"`
 	Question             string           `json:"question"`
 	Answer               []AnswerResponse `json:"answer"`
 }
 
 type QuestionResponse struct {
+	Id                   int32  `json:"id"`
 	Question             string `json:"question"`
 	ProgrammingLanguange string `json:"programming_languange"`
 }
@@ -36,7 +42,12 @@ type CountQuestionResponse struct {
 }
 
 type TotalAnswerAttemptResponse struct {
+	LevelId  int32  `json:"level_id"`
 	Username string `json:"username"`
 	Level    string `json:"level"`
-	Score    int32  `json:"total"`
+	Score    int32  `json:"score"`
+}
+
+type RecommendationResponse struct {
+	ImageUrl string `json:"image_url"`
 }

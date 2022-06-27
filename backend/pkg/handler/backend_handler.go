@@ -127,7 +127,7 @@ func (handler *Handler) updateAdminQuestion(writer http.ResponseWriter, request 
 		return
 	}
 
-	_, err = handler.service.BackendService.UpdateAdminQuestion(
+	updateResponse, err := handler.service.BackendService.UpdateAdminQuestion(
 		questionUpdateRequest, int32(questionId),
 	)
 	if err != nil {
@@ -143,7 +143,7 @@ func (handler *Handler) updateAdminQuestion(writer http.ResponseWriter, request 
 	webResponse := web.WebResponse{
 		Status:  http.StatusOK,
 		Message: "UPDATE OK",
-		Data:    "Successfully updated question",
+		Data:    updateResponse,
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)
