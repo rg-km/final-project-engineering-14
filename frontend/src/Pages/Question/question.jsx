@@ -13,9 +13,6 @@ const Question = () => {
 	const [listQuestion, setListQuestion] = useState([]);
 	const [listAnswer, setListAnswer] = useState([]);
 	const [pageQuestion, setPageQuestion] = useState(1);
-	// const [questionId, setQuestionId] = useState(0);
-	// let { questionId } = useParams();
-	// console.log(questionId, "questionId");
 	const fetchListPost = async () => {
 		let auth = localStorage.getItem("token");
 		let pageQuestions = "";
@@ -25,7 +22,6 @@ const Question = () => {
 			pageQuestions = localStorage.getItem("pageQuestion");
 		}
 
-		// e.preventDefault();
 		try {
 			let res = await axios.get(
 				`${API.API_URL}/home/start-ruang-arah/1?page=${pageQuestions}&per_page=1`,
@@ -37,58 +33,44 @@ const Question = () => {
 					},
 				}
 			);
-			// console.log(res);
 			setListQuestion(res.data.data[0].question);
 			setListAnswer(res.data.data[0].answer);
-			// setQuestionId(res.data.data[0].id);
-			// console.log(res.data.data);
-		} catch (error) {
-			// console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	useEffect(() => {
-		// console.log(localStorage.getItem("pageQuestion"));
 		if (localStorage.getItem(pageQuestion) === null) {
 			localStorage.setItem("pageQuestion", 1);
 			fetchListPost();
 		}
 		localStorage.removeItem("questionId");
 		localStorage.removeItem("Answer Question");
-		// console.log(questionId);
 	}, []);
 
 	const handleClick = () => {
 		setPageQuestion(pageQuestion + 1);
-		// console.log("pageQuestion", pageQuestion);
+
 		localStorage.setItem("pageQuestion", pageQuestion + 1);
 		localStorage.setItem("questionId", pageQuestion);
-		// let y = localStorage.getItem("pageQuestion");
-		// console.log("ini y", y);
+
 		fetchListPost();
 	};
 
 	const handleChange = (e) => {
 		e.persist();
 		let y = localStorage.getItem("pageQuestion");
-		// console.log("ini y", y);
 		console.log(typeof localStorage.getItem("pageQuestion"));
 		let z = localStorage.getItem("questionId");
-		// console.log("test id ", e.target.id);
-		// let x = pageQuestion;
-		// setQuestionId(x);
 		let object = {};
 		if (y === "1") {
 			object[y] = e.target.value;
 			localStorage.setItem("Answer Question", JSON.stringify(object));
 		} else if (y > z) {
 			let x = JSON.parse(localStorage.getItem("Answer Question"));
-			// console.log("ini x", x);
+
 			x[y] = e.target.value;
 			localStorage.setItem("Answer Question", JSON.stringify(x));
 		}
-
-		// console.log("jawaban", e.target.value);
 	};
 
 	const handleSubmit = async () => {
@@ -106,10 +88,9 @@ const Question = () => {
 					},
 				}
 			);
-			// console.log(res);
+
 			localStorage.setItem("Level", JSON.stringify(res.data.data));
 			navigate("/Level");
-			// setListLanguage(res.data.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -127,17 +108,7 @@ const Question = () => {
 									Soal ke - {pageQuestion} / 9
 								</h5>
 							</div>
-							<div className="col-6">
-								{/* <Link to="/Level"> */}
-								{/* <button
-                  type="button"
-                  className="btn btn-warning kanan mr-3"
-                  onClick={handleClick}
-                >
-                  Next
-                </button> */}
-								{/* </Link> */}
-							</div>
+							<div className="col-6"></div>
 						</div>
 
 						<div className="card-text">
@@ -163,7 +134,7 @@ const Question = () => {
 					{questionId < 8 ? (
 						<button
 							type="button"
-							className="btn btn-warning kanan mr-3"
+							className="btn btn-warning mr-3"
 							onClick={handleClick}
 						>
 							Next

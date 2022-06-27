@@ -27,12 +27,10 @@ export const App = () => {
 				<Route path="/HomePage" element={<HomePage />}></Route>
 				<Route path="/Level" element={<Level />}></Route>
 				<Route path="/Language" element={<Language />}></Route>
-				<Route path="/Recomendation" element={<Recomendation />}></Route>
+				<Route path="/Recommendation" element={<Recomendation />}></Route>
 				<Route path="/Dashboard" element={<Dashboard />}></Route>
 				<Route path="/CreateQuestion" element={<CreateQuestion />}></Route>
-				<Route path="/Update/:id" element={<Update />}>
-					{/* <Route path=":id" element={<Update />}></Route> */}
-				</Route>
+				<Route path="/Update" element={<Update />}></Route>
 			</Route>
 
 			<Route path="*" element={<Navigate to="/" />}></Route>

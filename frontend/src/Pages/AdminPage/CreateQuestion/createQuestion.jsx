@@ -10,7 +10,6 @@ import Navbar from "../../../Components/Navbar/Navbar";
 import { Container, Form, Button } from "react-bootstrap";
 
 export default function CreateQuestion() {
-	// const navigate = useNavigate();
 	const [programming_languange, setProgramming_languange] = useState("");
 	const [question, setQuestion] = useState("");
 	const navigate = useNavigate();
@@ -33,13 +32,10 @@ export default function CreateQuestion() {
 					},
 				}
 			);
-			// console.log(res);
 			if (res.status === 200) {
 				navigate("/Dashboard");
 			}
-		} catch (error) {
-			// console.log(error);
-		}
+		} catch (error) {}
 	};
 
 	return (

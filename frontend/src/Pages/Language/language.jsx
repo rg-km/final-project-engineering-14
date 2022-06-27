@@ -11,8 +11,6 @@ const Language = () => {
 
 	const fetchListPost = async () => {
 		let auth = localStorage.getItem("token");
-
-		// e.preventDefault();
 		try {
 			let res = await axios.get(`${API.API_URL}/home/start-ruang-arah`, {
 				headers: {
@@ -21,7 +19,6 @@ const Language = () => {
 					Authorization: "Bearer " + auth,
 				},
 			});
-			// console.log(res);
 			setListLanguage(res.data.data);
 		} catch (error) {
 			console.log(error);

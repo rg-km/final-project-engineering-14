@@ -5,9 +5,9 @@ import API from "../../../Api/Api";
 
 import "./dashboard.css";
 import Navbar from "../../../Components/Navbar/Navbar";
-import { Container, Table, Button, Row, Col } from "react-bootstrap";
+import { Container, Table, Button, Row, Col, Card } from "react-bootstrap";
 
-export default function Dashboard() {
+export default function Dashboard(id) {
 	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
 
@@ -24,22 +24,12 @@ export default function Dashboard() {
 				Authorization: "Bearer " + auth,
 			},
 		});
-		// console.log(res.data);
-		// console.log(res.data.length);
-		// if (!res.data === { null: "null" }) {
-		// setCheck(false);
 		setPosts(res.data);
-		// navigate("/Dashboard");
-		// } else {
-		// 	navigate("/CreateQuestion");
-		// }
 	};
 
 	useEffect(() => {
 		getPosts();
 	}, []);
-
-	// console.warn(posts);
 
 	function deleteQuestion(id) {
 		fetch(apiDeletes + `${id}`, {
@@ -49,19 +39,16 @@ export default function Dashboard() {
 				"Content-Type": "application/json",
 				Authorization: "Bearer " + auth,
 			},
-		})
-			// console.log(posts.questionQuestion);
-			.then((result) => {
-				result.json().then((res) => {
-					// console.warn(res);
-					getPosts();
-				});
+		}).then((result) => {
+			result.json().then((res) => {
+				getPosts();
 			});
+		});
 	}
 
-	function handleUpdate() {
-		// console.log(id);
-		// navigate("/Update" + id);
+	function handleUpdate(id) {
+		localStorage.setItem("questionId", id);
+		navigate("/Update");
 	}
 
 	return (
@@ -74,20 +61,9 @@ export default function Dashboard() {
 				<Container>
 					<Row className="mb-5">
 						<Col>
-							{/* <Card className="card float-left text-center">
-								<Row className="my-auto mt-2">
-									<Col className="col-9">
-										<p className="my-auto">Jumlah Soal : {posts.length}</p>
-									</Col>
-									<Col className="col-3 ps-1"> */}
-							{/* {posts.map((postlength, index) => {
-											<p key={index} id="total_question">
-												{postlength.length}
-											</p>;
-										})} */}
-							{/* </Col>
-								</Row>
-							</Card> */}
+							<Card className="card float-left text-center">
+								<p className="my-auto mx-auto">Jumlah Soal : {posts.length}</p>
+							</Card>
 						</Col>
 						<Col className="float-sm-right">
 							<Link to="/CreateQuestion">
@@ -115,14 +91,12 @@ export default function Dashboard() {
 									<td className="my-auto">{post.programming_languange}</td>
 									<td>{post.question}</td>
 									<td>
-										<Link to={"/Update/" + post.id}>
-											<Button
-												variant="warning"
-												// onClick={() => handleUpdate(post.id)}
-											>
-												Update
-											</Button>
-										</Link>
+										<Button
+											variant="warning"
+											onClick={() => handleUpdate(post.id)}
+										>
+											Update
+										</Button>
 									</td>
 									<td>
 										<Button
@@ -141,41 +115,3 @@ export default function Dashboard() {
 		</section>
 	);
 }
-
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import { Link, useNavigate } from "react-router-dom";
-// import API from "../../../Api/Api";
-
-// import Navbar from "../../../Components/Navbar/Navbar";
-// import { Container, Table, Card, Button, Row, Col } from "react-bootstrap";
-
-// function Dashboard() {
-// 	const apiQuestions = `${API.API_URL}/admin/questions`;
-// 	const apiDeletes = `${API.API_URL}/admin/questions/delete/`;
-// 	let auth = localStorage.getItem("token");
-
-// 	const [post, setPost] = useState([]);
-
-// 	const getPost = async () => {
-// 		const response = await axios.get(apiQuestions, {
-// 			headers: {
-// 				Accept: "application/json",
-// 				"Content-Type": "application/json",
-// 				Authorization: "Bearer " + auth,
-// 			},
-// 		});
-// 		return response.data;
-// 	};
-
-// 	useEffect(() => {
-// 		const getAllPost = async () => {
-// 			const allPost = await getPost();
-// 			if (allPost) setPost(allPost);
-// 		};
-
-// 		getAllPost();
-// 	}, []);
-// }
-
-// export default Dashboard;
