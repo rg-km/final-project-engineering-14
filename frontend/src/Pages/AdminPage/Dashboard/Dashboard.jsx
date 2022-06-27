@@ -59,9 +59,9 @@ export default function Dashboard() {
 			});
 	}
 
-	function handleUpdate(id, props) {
+	function handleUpdate() {
 		// console.log(id);
-		navigate("/Update" + id);
+		// navigate("/Update" + id);
 	}
 
 	return (
